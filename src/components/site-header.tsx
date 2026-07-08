@@ -41,12 +41,13 @@ export function SiteHeader() {
           >
             All listings
           </Link>
-          <a
-            href="#verified"
+          <Link
+            to="/"
+            hash="verified"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Verified agents
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -95,6 +96,15 @@ export function SiteHeader() {
             <Link to="/properties" search={{ listing_type: "sale" }} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Buy</Link>
             <Link to="/properties" search={{ listing_type: "rent" }} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Rent</Link>
             <Link to="/properties" search={{}} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>All listings</Link>
+            <Link to="/" hash="verified" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Verified agents</Link>
+            {user ? (
+              <>
+                <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Dashboard</Link>
+                <Link to="/properties/new" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Post property</Link>
+              </>
+            ) : (
+              <Link to="/auth" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Sign in</Link>
+            )}
           </nav>
         </div>
       ) : null}
