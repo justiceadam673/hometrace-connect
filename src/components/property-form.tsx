@@ -69,6 +69,7 @@ export function PropertyForm({
   });
   const [amenityInput, setAmenityInput] = useState("");
   const [amenities, setAmenities] = useState<string[]>(initial?.amenities ?? []);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [form, setForm] = useState<PropertyFormValues>({
     title: initial?.title ?? "",
@@ -89,8 +90,15 @@ export function PropertyForm({
     year_built: initial?.year_built ?? undefined,
   });
 
-  const set = <K extends keyof PropertyFormValues>(k: K, v: PropertyFormValues[K]) =>
+  const setField = <K extends keyof PropertyFormValues>(k: K, v: PropertyFormValues[K]) => {
     setForm((f) => ({ ...f, [k]: v }));
+    setErrors((prev) => {
+      if (!prev[k]) return prev;
+      const next = { ...prev };
+      delete next[k];
+      return next;
+    });
+  };
 
   async function handleFiles(files: FileList | null) {
     if (!files || !files.length) return;
