@@ -315,8 +315,6 @@ function UnitsSection({
           </table>
         )}
       </div>
-      {/* silence unused imports lint */}
-      <span className="hidden">{navigate.length}</span>
     </div>
   );
 }
