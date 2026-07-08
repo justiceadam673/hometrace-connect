@@ -180,19 +180,19 @@ export function PropertyForm({
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div className="md:col-span-2">
             <Label htmlFor="title">Title</Label>
-            <Input id="title" value={form.title ?? ""} onChange={(e) => set("title", e.target.value)} required maxLength={140} />
+            <Input id="title" value={form.title ?? ""} onChange={(e) => setField("title", e.target.value)} required maxLength={140} />
           </div>
           <div className="md:col-span-2">
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" rows={5} value={form.description ?? ""} onChange={(e) => set("description", e.target.value)} maxLength={4000} />
+            <Textarea id="description" rows={5} value={form.description ?? ""} onChange={(e) => setField("description", e.target.value)} maxLength={4000} />
           </div>
           <div>
             <Label htmlFor="price">Price (₦)</Label>
-            <Input id="price" type="number" min={0} value={form.price ?? 0} onChange={(e) => set("price", Number(e.target.value))} required />
+            <Input id="price" type="number" min={0} value={form.price ?? 0} onChange={(e) => setField("price", Number(e.target.value))} required />
           </div>
           <div>
             <Label>Listing type</Label>
-            <Select value={form.listing_type} onValueChange={(v) => set("listing_type", v as PropertyRow["listing_type"])}>
+            <Select value={form.listing_type} onValueChange={(v) => setField("listing_type", v as PropertyRow["listing_type"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="sale">For sale</SelectItem>
@@ -203,7 +203,7 @@ export function PropertyForm({
           </div>
           <div>
             <Label>Property type</Label>
-            <Select value={form.property_type} onValueChange={(v) => set("property_type", v as PropertyRow["property_type"])}>
+            <Select value={form.property_type} onValueChange={(v) => setField("property_type", v as PropertyRow["property_type"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {["house","duplex","apartment","land","commercial","office","warehouse","estate"].map((t) => (
@@ -214,7 +214,7 @@ export function PropertyForm({
           </div>
           <div>
             <Label>Status</Label>
-            <Select value={form.status} onValueChange={(v) => set("status", v as PropertyRow["status"])}>
+            <Select value={form.status} onValueChange={(v) => setField("status", v as PropertyRow["status"])}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="draft">Draft</SelectItem>
@@ -233,7 +233,7 @@ export function PropertyForm({
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div>
             <Label>State</Label>
-            <Select value={form.state} onValueChange={(v) => set("state", v)}>
+            <Select value={form.state} onValueChange={(v) => setField("state", v)}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent className="max-h-72">
                 {NIGERIAN_STATES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
@@ -242,15 +242,15 @@ export function PropertyForm({
           </div>
           <div>
             <Label htmlFor="city">City / LGA</Label>
-            <Input id="city" value={form.city ?? ""} onChange={(e) => set("city", e.target.value)} />
+            <Input id="city" value={form.city ?? ""} onChange={(e) => setField("city", e.target.value)} />
           </div>
           <div>
             <Label htmlFor="area">Area / Neighborhood</Label>
-            <Input id="area" value={form.area ?? ""} onChange={(e) => set("area", e.target.value)} />
+            <Input id="area" value={form.area ?? ""} onChange={(e) => setField("area", e.target.value)} />
           </div>
           <div>
             <Label htmlFor="address">Street address</Label>
-            <Input id="address" value={form.address ?? ""} onChange={(e) => set("address", e.target.value)} />
+            <Input id="address" value={form.address ?? ""} onChange={(e) => setField("address", e.target.value)} />
           </div>
         </CardContent>
       </Card>
