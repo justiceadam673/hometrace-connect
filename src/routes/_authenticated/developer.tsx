@@ -19,13 +19,13 @@ export const Route = createFileRoute("/_authenticated/developer")({
   component: DeveloperLayout,
 });
 
-const TABS = [
+const TABS: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/developer", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/developer/projects", label: "Projects", icon: Building2 },
   { to: "/developer/team", label: "Team", icon: Users },
   { to: "/developer/marketing", label: "Marketing", icon: LineChart },
   { to: "/developer/profile", label: "Company", icon: BadgeCheck },
-] as const;
+];
 
 function DeveloperLayout() {
   const { user } = useAuth();
