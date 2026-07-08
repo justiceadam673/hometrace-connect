@@ -63,7 +63,7 @@ function DeveloperLayout() {
             return (
               <Link
                 key={t.to}
-                to={t.to}
+                to={t.to as "/developer"}
                 className={cn(
                   "-mb-px inline-flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors",
                   active
