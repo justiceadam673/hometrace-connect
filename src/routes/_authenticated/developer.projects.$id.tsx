@@ -146,7 +146,6 @@ function UnitsSection({
   units: Unit[];
 }) {
   const qc = useQueryClient();
-  const qc = useQueryClient();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Unit | null>(null);
   const [saving, setSaving] = useState(false);
