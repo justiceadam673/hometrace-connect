@@ -14,7 +14,213 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      agents: {
+        Row: {
+          bio: string | null
+          company: string | null
+          created_at: string
+          id: string
+          languages: string[] | null
+          license_number: string | null
+          rating: number | null
+          response_time_hours: number | null
+          review_count: number | null
+          verification: Database["public"]["Enums"]["verification_status"]
+          years_experience: number | null
+        }
+        Insert: {
+          bio?: string | null
+          company?: string | null
+          created_at?: string
+          id: string
+          languages?: string[] | null
+          license_number?: string | null
+          rating?: number | null
+          response_time_hours?: number | null
+          review_count?: number | null
+          verification?: Database["public"]["Enums"]["verification_status"]
+          years_experience?: number | null
+        }
+        Update: {
+          bio?: string | null
+          company?: string | null
+          created_at?: string
+          id?: string
+          languages?: string[] | null
+          license_number?: string | null
+          rating?: number | null
+          response_time_hours?: number | null
+          review_count?: number | null
+          verification?: Database["public"]["Enums"]["verification_status"]
+          years_experience?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agents_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      favorites: {
+        Row: {
+          created_at: string
+          property_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          property_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          property_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string | null
+          agent_id: string | null
+          amenities: string[] | null
+          area: string | null
+          bathrooms: number | null
+          bedrooms: number | null
+          city: string | null
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          featured: boolean
+          gallery: string[] | null
+          id: string
+          latitude: number | null
+          listing_type: Database["public"]["Enums"]["listing_type"]
+          longitude: number | null
+          nearby: string[] | null
+          parking: number | null
+          price: number
+          property_type: Database["public"]["Enums"]["property_type"]
+          sqm: number | null
+          state: string
+          status: Database["public"]["Enums"]["property_status"]
+          title: string
+          toilets: number | null
+          updated_at: string
+          views: number
+          year_built: number | null
+        }
+        Insert: {
+          address?: string | null
+          agent_id?: string | null
+          amenities?: string[] | null
+          area?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          gallery?: string[] | null
+          id?: string
+          latitude?: number | null
+          listing_type?: Database["public"]["Enums"]["listing_type"]
+          longitude?: number | null
+          nearby?: string[] | null
+          parking?: number | null
+          price: number
+          property_type?: Database["public"]["Enums"]["property_type"]
+          sqm?: number | null
+          state: string
+          status?: Database["public"]["Enums"]["property_status"]
+          title: string
+          toilets?: number | null
+          updated_at?: string
+          views?: number
+          year_built?: number | null
+        }
+        Update: {
+          address?: string | null
+          agent_id?: string | null
+          amenities?: string[] | null
+          area?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          gallery?: string[] | null
+          id?: string
+          latitude?: number | null
+          listing_type?: Database["public"]["Enums"]["listing_type"]
+          longitude?: number | null
+          nearby?: string[] | null
+          parking?: number | null
+          price?: number
+          property_type?: Database["public"]["Enums"]["property_type"]
+          sqm?: number | null
+          state?: string
+          status?: Database["public"]["Enums"]["property_status"]
+          title?: string
+          toilets?: number | null
+          updated_at?: string
+          views?: number
+          year_built?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_agent_id_fkey"
+            columns: ["agent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +229,19 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      listing_type: "sale" | "rent" | "shortlet"
+      property_status: "available" | "reserved" | "sold" | "rented" | "draft"
+      property_type:
+        | "house"
+        | "duplex"
+        | "apartment"
+        | "land"
+        | "commercial"
+        | "office"
+        | "warehouse"
+        | "estate"
+      user_role: "buyer" | "agent" | "developer" | "admin"
+      verification_status: "unverified" | "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +368,21 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      listing_type: ["sale", "rent", "shortlet"],
+      property_status: ["available", "reserved", "sold", "rented", "draft"],
+      property_type: [
+        "house",
+        "duplex",
+        "apartment",
+        "land",
+        "commercial",
+        "office",
+        "warehouse",
+        "estate",
+      ],
+      user_role: ["buyer", "agent", "developer", "admin"],
+      verification_status: ["unverified", "pending", "verified", "rejected"],
+    },
   },
 } as const
