@@ -7,7 +7,7 @@ import { adminListingsQuery } from "@/lib/admin";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatPrice } from "@/lib/format";
+import { formatNaira } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/admin/listings")({
   component: AdminListings,
@@ -49,7 +49,7 @@ function AdminListings() {
                   <Badge variant="outline">{l.status}</Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {formatPrice(l.price)} · {l.property_type} · {l.listing_type} · {l.city ?? l.state} · {l.views} views
+                  {formatNaira(l.price)} · {l.property_type} · {l.listing_type} · {l.city ?? l.state} · {l.views} views
                 </p>
               </div>
             </div>
