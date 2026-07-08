@@ -64,6 +64,98 @@ export type Database = {
           },
         ]
       }
+      developer_team: {
+        Row: {
+          created_at: string
+          developer_id: string
+          full_name: string | null
+          id: string
+          invite_email: string | null
+          role: Database["public"]["Enums"]["team_role"]
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          developer_id: string
+          full_name?: string | null
+          id?: string
+          invite_email?: string | null
+          role?: Database["public"]["Enums"]["team_role"]
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          developer_id?: string
+          full_name?: string | null
+          id?: string
+          invite_email?: string | null
+          role?: Database["public"]["Enums"]["team_role"]
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "developer_team_developer_id_fkey"
+            columns: ["developer_id"]
+            isOneToOne: false
+            referencedRelation: "developers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      developers: {
+        Row: {
+          company_name: string
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          email: string | null
+          established_year: number | null
+          featured: boolean
+          headquarters: string | null
+          id: string
+          logo_url: string | null
+          phone: string | null
+          slug: string | null
+          updated_at: string
+          verification: Database["public"]["Enums"]["verification_status"]
+          website: string | null
+        }
+        Insert: {
+          company_name: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          established_year?: number | null
+          featured?: boolean
+          headquarters?: string | null
+          id: string
+          logo_url?: string | null
+          phone?: string | null
+          slug?: string | null
+          updated_at?: string
+          verification?: Database["public"]["Enums"]["verification_status"]
+          website?: string | null
+        }
+        Update: {
+          company_name?: string
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          established_year?: number | null
+          featured?: boolean
+          headquarters?: string | null
+          id?: string
+          logo_url?: string | null
+          phone?: string | null
+          slug?: string | null
+          updated_at?: string
+          verification?: Database["public"]["Enums"]["verification_status"]
+          website?: string | null
+        }
+        Relationships: []
+      }
       favorites: {
         Row: {
           created_at: string
@@ -119,6 +211,95 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      projects: {
+        Row: {
+          address: string | null
+          amenities: string[] | null
+          area: string | null
+          brochure_url: string | null
+          city: string | null
+          completion_date: string | null
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          developer_id: string
+          featured: boolean
+          gallery: string[] | null
+          id: string
+          launch_date: string | null
+          layout_image: string | null
+          name: string
+          published: boolean
+          slug: string | null
+          starting_price: number | null
+          state: string
+          status: Database["public"]["Enums"]["project_status"]
+          total_units: number | null
+          updated_at: string
+          views: number
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[] | null
+          area?: string | null
+          brochure_url?: string | null
+          city?: string | null
+          completion_date?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          developer_id: string
+          featured?: boolean
+          gallery?: string[] | null
+          id?: string
+          launch_date?: string | null
+          layout_image?: string | null
+          name: string
+          published?: boolean
+          slug?: string | null
+          starting_price?: number | null
+          state: string
+          status?: Database["public"]["Enums"]["project_status"]
+          total_units?: number | null
+          updated_at?: string
+          views?: number
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[] | null
+          area?: string | null
+          brochure_url?: string | null
+          city?: string | null
+          completion_date?: string | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          developer_id?: string
+          featured?: boolean
+          gallery?: string[] | null
+          id?: string
+          launch_date?: string | null
+          layout_image?: string | null
+          name?: string
+          published?: boolean
+          slug?: string | null
+          starting_price?: number | null
+          state?: string
+          status?: Database["public"]["Enums"]["project_status"]
+          total_units?: number | null
+          updated_at?: string
+          views?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_developer_id_fkey"
+            columns: ["developer_id"]
+            isOneToOne: false
+            referencedRelation: "developers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       properties: {
         Row: {
@@ -221,15 +402,164 @@ export type Database = {
           },
         ]
       }
+      unit_sales: {
+        Row: {
+          buyer_email: string | null
+          buyer_name: string
+          buyer_phone: string | null
+          created_at: string
+          deposit: number | null
+          developer_id: string
+          id: string
+          notes: string | null
+          project_id: string
+          recorded_by: string | null
+          sale_date: string
+          sale_price: number
+          unit_id: string
+        }
+        Insert: {
+          buyer_email?: string | null
+          buyer_name: string
+          buyer_phone?: string | null
+          created_at?: string
+          deposit?: number | null
+          developer_id: string
+          id?: string
+          notes?: string | null
+          project_id: string
+          recorded_by?: string | null
+          sale_date?: string
+          sale_price: number
+          unit_id: string
+        }
+        Update: {
+          buyer_email?: string | null
+          buyer_name?: string
+          buyer_phone?: string | null
+          created_at?: string
+          deposit?: number | null
+          developer_id?: string
+          id?: string
+          notes?: string | null
+          project_id?: string
+          recorded_by?: string | null
+          sale_date?: string
+          sale_price?: number
+          unit_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_sales_developer_id_fkey"
+            columns: ["developer_id"]
+            isOneToOne: false
+            referencedRelation: "developers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_sales_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_sales_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      units: {
+        Row: {
+          bathrooms: number | null
+          bedrooms: number | null
+          created_at: string
+          developer_id: string
+          floor_plan_url: string | null
+          id: string
+          notes: string | null
+          price: number
+          project_id: string
+          sqm: number | null
+          status: Database["public"]["Enums"]["unit_status"]
+          unit_number: string
+          unit_type: string | null
+          updated_at: string
+        }
+        Insert: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          developer_id: string
+          floor_plan_url?: string | null
+          id?: string
+          notes?: string | null
+          price: number
+          project_id: string
+          sqm?: number | null
+          status?: Database["public"]["Enums"]["unit_status"]
+          unit_number: string
+          unit_type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string
+          developer_id?: string
+          floor_plan_url?: string | null
+          id?: string
+          notes?: string | null
+          price?: number
+          project_id?: string
+          sqm?: number | null
+          status?: Database["public"]["Enums"]["unit_status"]
+          unit_number?: string
+          unit_type?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "units_developer_id_fkey"
+            columns: ["developer_id"]
+            isOneToOne: false
+            referencedRelation: "developers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "units_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_developer_manager: {
+        Args: { _developer_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_developer_member: {
+        Args: { _developer_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       listing_type: "sale" | "rent" | "shortlet"
+      project_status:
+        | "planning"
+        | "pre_launch"
+        | "selling"
+        | "sold_out"
+        | "completed"
       property_status: "available" | "reserved" | "sold" | "rented" | "draft"
       property_type:
         | "house"
@@ -240,6 +570,8 @@ export type Database = {
         | "office"
         | "warehouse"
         | "estate"
+      team_role: "admin" | "manager" | "agent" | "viewer"
+      unit_status: "available" | "reserved" | "sold"
       user_role: "buyer" | "agent" | "developer" | "admin"
       verification_status: "unverified" | "pending" | "verified" | "rejected"
     }
@@ -370,6 +702,13 @@ export const Constants = {
   public: {
     Enums: {
       listing_type: ["sale", "rent", "shortlet"],
+      project_status: [
+        "planning",
+        "pre_launch",
+        "selling",
+        "sold_out",
+        "completed",
+      ],
       property_status: ["available", "reserved", "sold", "rented", "draft"],
       property_type: [
         "house",
@@ -381,6 +720,8 @@ export const Constants = {
         "warehouse",
         "estate",
       ],
+      team_role: ["admin", "manager", "agent", "viewer"],
+      unit_status: ["available", "reserved", "sold"],
       user_role: ["buyer", "agent", "developer", "admin"],
       verification_status: ["unverified", "pending", "verified", "rejected"],
     },

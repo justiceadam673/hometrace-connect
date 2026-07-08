@@ -56,6 +56,9 @@ export function SiteHeader() {
               <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
                 <Link to="/dashboard">Dashboard</Link>
               </Button>
+              <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+                <Link to="/developer">Developer</Link>
+              </Button>
               <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
                 <Link to="/properties/new">Post property</Link>
               </Button>

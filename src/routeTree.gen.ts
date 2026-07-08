@@ -14,9 +14,17 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIndexRouteImport } from './routes/properties.index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
+import { Route as AuthenticatedDeveloperRouteImport } from './routes/_authenticated/developer'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDeveloperIndexRouteImport } from './routes/_authenticated/developer.index'
 import { Route as AuthenticatedPropertiesNewRouteImport } from './routes/_authenticated/properties.new'
+import { Route as AuthenticatedDeveloperTeamRouteImport } from './routes/_authenticated/developer.team'
+import { Route as AuthenticatedDeveloperProjectsRouteImport } from './routes/_authenticated/developer.projects'
+import { Route as AuthenticatedDeveloperProfileRouteImport } from './routes/_authenticated/developer.profile'
+import { Route as AuthenticatedDeveloperMarketingRouteImport } from './routes/_authenticated/developer.marketing'
 import { Route as AuthenticatedPropertiesIdEditRouteImport } from './routes/_authenticated/properties.$id.edit'
+import { Route as AuthenticatedDeveloperProjectsNewRouteImport } from './routes/_authenticated/developer.projects.new'
+import { Route as AuthenticatedDeveloperProjectsIdRouteImport } from './routes/_authenticated/developer.projects.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -42,16 +50,51 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
   path: '/properties/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDeveloperRoute = AuthenticatedDeveloperRouteImport.update({
+  id: '/developer',
+  path: '/developer',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDeveloperIndexRoute =
+  AuthenticatedDeveloperIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
 const AuthenticatedPropertiesNewRoute =
   AuthenticatedPropertiesNewRouteImport.update({
     id: '/properties/new',
     path: '/properties/new',
     getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDeveloperTeamRoute =
+  AuthenticatedDeveloperTeamRouteImport.update({
+    id: '/team',
+    path: '/team',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
+const AuthenticatedDeveloperProjectsRoute =
+  AuthenticatedDeveloperProjectsRouteImport.update({
+    id: '/projects',
+    path: '/projects',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
+const AuthenticatedDeveloperProfileRoute =
+  AuthenticatedDeveloperProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
+const AuthenticatedDeveloperMarketingRoute =
+  AuthenticatedDeveloperMarketingRouteImport.update({
+    id: '/marketing',
+    path: '/marketing',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
   } as any)
 const AuthenticatedPropertiesIdEditRoute =
   AuthenticatedPropertiesIdEditRouteImport.update({
@@ -59,14 +102,34 @@ const AuthenticatedPropertiesIdEditRoute =
     path: '/properties/$id/edit',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDeveloperProjectsNewRoute =
+  AuthenticatedDeveloperProjectsNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => AuthenticatedDeveloperProjectsRoute,
+  } as any)
+const AuthenticatedDeveloperProjectsIdRoute =
+  AuthenticatedDeveloperProjectsIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedDeveloperProjectsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/developer': typeof AuthenticatedDeveloperRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
+  '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
+  '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/properties/new': typeof AuthenticatedPropertiesNewRoute
+  '/developer/': typeof AuthenticatedDeveloperIndexRoute
+  '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
+  '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRoutesByTo {
@@ -75,7 +138,14 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/properties': typeof PropertiesIndexRoute
+  '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
+  '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
+  '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/properties/new': typeof AuthenticatedPropertiesNewRoute
+  '/developer': typeof AuthenticatedDeveloperIndexRoute
+  '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
+  '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRoutesById {
@@ -84,9 +154,17 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/developer': typeof AuthenticatedDeveloperRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/_authenticated/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
+  '/_authenticated/developer/profile': typeof AuthenticatedDeveloperProfileRoute
+  '/_authenticated/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/_authenticated/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/_authenticated/properties/new': typeof AuthenticatedPropertiesNewRoute
+  '/_authenticated/developer/': typeof AuthenticatedDeveloperIndexRoute
+  '/_authenticated/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
+  '/_authenticated/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/_authenticated/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
 export interface FileRouteTypes {
@@ -95,9 +173,17 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/dashboard'
+    | '/developer'
     | '/properties/$id'
     | '/properties/'
+    | '/developer/marketing'
+    | '/developer/profile'
+    | '/developer/projects'
+    | '/developer/team'
     | '/properties/new'
+    | '/developer/'
+    | '/developer/projects/$id'
+    | '/developer/projects/new'
     | '/properties/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -106,7 +192,14 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/properties/$id'
     | '/properties'
+    | '/developer/marketing'
+    | '/developer/profile'
+    | '/developer/projects'
+    | '/developer/team'
     | '/properties/new'
+    | '/developer'
+    | '/developer/projects/$id'
+    | '/developer/projects/new'
     | '/properties/$id/edit'
   id:
     | '__root__'
@@ -114,9 +207,17 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/developer'
     | '/properties/$id'
     | '/properties/'
+    | '/_authenticated/developer/marketing'
+    | '/_authenticated/developer/profile'
+    | '/_authenticated/developer/projects'
+    | '/_authenticated/developer/team'
     | '/_authenticated/properties/new'
+    | '/_authenticated/developer/'
+    | '/_authenticated/developer/projects/$id'
+    | '/_authenticated/developer/projects/new'
     | '/_authenticated/properties/$id/edit'
   fileRoutesById: FileRoutesById
 }
@@ -165,12 +266,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/developer': {
+      id: '/_authenticated/developer'
+      path: '/developer'
+      fullPath: '/developer'
+      preLoaderRoute: typeof AuthenticatedDeveloperRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/developer/': {
+      id: '/_authenticated/developer/'
+      path: '/'
+      fullPath: '/developer/'
+      preLoaderRoute: typeof AuthenticatedDeveloperIndexRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
     }
     '/_authenticated/properties/new': {
       id: '/_authenticated/properties/new'
@@ -179,6 +294,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPropertiesNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/developer/team': {
+      id: '/_authenticated/developer/team'
+      path: '/team'
+      fullPath: '/developer/team'
+      preLoaderRoute: typeof AuthenticatedDeveloperTeamRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
+    '/_authenticated/developer/projects': {
+      id: '/_authenticated/developer/projects'
+      path: '/projects'
+      fullPath: '/developer/projects'
+      preLoaderRoute: typeof AuthenticatedDeveloperProjectsRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
+    '/_authenticated/developer/profile': {
+      id: '/_authenticated/developer/profile'
+      path: '/profile'
+      fullPath: '/developer/profile'
+      preLoaderRoute: typeof AuthenticatedDeveloperProfileRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
+    '/_authenticated/developer/marketing': {
+      id: '/_authenticated/developer/marketing'
+      path: '/marketing'
+      fullPath: '/developer/marketing'
+      preLoaderRoute: typeof AuthenticatedDeveloperMarketingRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
     '/_authenticated/properties/$id/edit': {
       id: '/_authenticated/properties/$id/edit'
       path: '/properties/$id/edit'
@@ -186,17 +329,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPropertiesIdEditRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/developer/projects/new': {
+      id: '/_authenticated/developer/projects/new'
+      path: '/new'
+      fullPath: '/developer/projects/new'
+      preLoaderRoute: typeof AuthenticatedDeveloperProjectsNewRouteImport
+      parentRoute: typeof AuthenticatedDeveloperProjectsRoute
+    }
+    '/_authenticated/developer/projects/$id': {
+      id: '/_authenticated/developer/projects/$id'
+      path: '/$id'
+      fullPath: '/developer/projects/$id'
+      preLoaderRoute: typeof AuthenticatedDeveloperProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedDeveloperProjectsRoute
+    }
   }
 }
 
+interface AuthenticatedDeveloperProjectsRouteChildren {
+  AuthenticatedDeveloperProjectsIdRoute: typeof AuthenticatedDeveloperProjectsIdRoute
+  AuthenticatedDeveloperProjectsNewRoute: typeof AuthenticatedDeveloperProjectsNewRoute
+}
+
+const AuthenticatedDeveloperProjectsRouteChildren: AuthenticatedDeveloperProjectsRouteChildren =
+  {
+    AuthenticatedDeveloperProjectsIdRoute:
+      AuthenticatedDeveloperProjectsIdRoute,
+    AuthenticatedDeveloperProjectsNewRoute:
+      AuthenticatedDeveloperProjectsNewRoute,
+  }
+
+const AuthenticatedDeveloperProjectsRouteWithChildren =
+  AuthenticatedDeveloperProjectsRoute._addFileChildren(
+    AuthenticatedDeveloperProjectsRouteChildren,
+  )
+
+interface AuthenticatedDeveloperRouteChildren {
+  AuthenticatedDeveloperMarketingRoute: typeof AuthenticatedDeveloperMarketingRoute
+  AuthenticatedDeveloperProfileRoute: typeof AuthenticatedDeveloperProfileRoute
+  AuthenticatedDeveloperProjectsRoute: typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  AuthenticatedDeveloperTeamRoute: typeof AuthenticatedDeveloperTeamRoute
+  AuthenticatedDeveloperIndexRoute: typeof AuthenticatedDeveloperIndexRoute
+}
+
+const AuthenticatedDeveloperRouteChildren: AuthenticatedDeveloperRouteChildren =
+  {
+    AuthenticatedDeveloperMarketingRoute: AuthenticatedDeveloperMarketingRoute,
+    AuthenticatedDeveloperProfileRoute: AuthenticatedDeveloperProfileRoute,
+    AuthenticatedDeveloperProjectsRoute:
+      AuthenticatedDeveloperProjectsRouteWithChildren,
+    AuthenticatedDeveloperTeamRoute: AuthenticatedDeveloperTeamRoute,
+    AuthenticatedDeveloperIndexRoute: AuthenticatedDeveloperIndexRoute,
+  }
+
+const AuthenticatedDeveloperRouteWithChildren =
+  AuthenticatedDeveloperRoute._addFileChildren(
+    AuthenticatedDeveloperRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDeveloperRoute: typeof AuthenticatedDeveloperRouteWithChildren
   AuthenticatedPropertiesNewRoute: typeof AuthenticatedPropertiesNewRoute
   AuthenticatedPropertiesIdEditRoute: typeof AuthenticatedPropertiesIdEditRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDeveloperRoute: AuthenticatedDeveloperRouteWithChildren,
   AuthenticatedPropertiesNewRoute: AuthenticatedPropertiesNewRoute,
   AuthenticatedPropertiesIdEditRoute: AuthenticatedPropertiesIdEditRoute,
 }
