@@ -179,6 +179,12 @@ export function PropertyForm({
     }
   }
 
+  const errorClass = (field: keyof PropertyFormValues | string) =>
+    cn(errors[field] && "border-destructive focus-visible:ring-destructive focus-visible:ring-1");
+
+  const selectErrorClass = (field: keyof PropertyFormValues | string) =>
+    cn(errors[field] && "border-destructive focus:ring-destructive focus:ring-1");
+
   return (
     <form onSubmit={onSubmit} className="space-y-6">
       <Card>
@@ -186,42 +192,47 @@ export function PropertyForm({
         <CardContent className="grid gap-4 md:grid-cols-2">
           <div className="md:col-span-2">
             <Label htmlFor="title">Title</Label>
-            <Input id="title" value={form.title ?? ""} onChange={(e) => setField("title", e.target.value)} required maxLength={140} />
+            <Input id="title" value={form.title ?? ""} onChange={(e) => setField("title", e.target.value)} required maxLength={140} className={errorClass("title")} aria-invalid={!!errors.title} />
+            {errors.title && <p className="mt-1 text-xs text-destructive">{errors.title}</p>}
           </div>
           <div className="md:col-span-2">
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" rows={5} value={form.description ?? ""} onChange={(e) => setField("description", e.target.value)} maxLength={4000} />
+            <Textarea id="description" rows={5} value={form.description ?? ""} onChange={(e) => setField("description", e.target.value)} maxLength={4000} className={errorClass("description")} aria-invalid={!!errors.description} />
+            {errors.description && <p className="mt-1 text-xs text-destructive">{errors.description}</p>}
           </div>
           <div>
             <Label htmlFor="price">Price (₦)</Label>
-            <Input id="price" type="number" min={0} value={form.price ?? 0} onChange={(e) => setField("price", Number(e.target.value))} required />
+            <Input id="price" type="number" min={0} value={form.price ?? 0} onChange={(e) => setField("price", Number(e.target.value))} required className={errorClass("price")} aria-invalid={!!errors.price} />
+            {errors.price && <p className="mt-1 text-xs text-destructive">{errors.price}</p>}
           </div>
           <div>
             <Label>Listing type</Label>
             <Select value={form.listing_type} onValueChange={(v) => setField("listing_type", v as PropertyRow["listing_type"])}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className={selectErrorClass("listing_type")} aria-invalid={!!errors.listing_type}><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="sale">For sale</SelectItem>
                 <SelectItem value="rent">For rent</SelectItem>
                 <SelectItem value="shortlet">Shortlet</SelectItem>
               </SelectContent>
             </Select>
+            {errors.listing_type && <p className="mt-1 text-xs text-destructive">{errors.listing_type}</p>}
           </div>
           <div>
             <Label>Property type</Label>
             <Select value={form.property_type} onValueChange={(v) => setField("property_type", v as PropertyRow["property_type"])}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className={selectErrorClass("property_type")} aria-invalid={!!errors.property_type}><SelectValue /></SelectTrigger>
               <SelectContent>
                 {["house","duplex","apartment","land","commercial","office","warehouse","estate"].map((t) => (
                   <SelectItem key={t} value={t}>{t[0].toUpperCase()+t.slice(1)}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
+            {errors.property_type && <p className="mt-1 text-xs text-destructive">{errors.property_type}</p>}
           </div>
           <div>
             <Label>Status</Label>
             <Select value={form.status} onValueChange={(v) => setField("status", v as PropertyRow["status"])}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className={selectErrorClass("status")} aria-invalid={!!errors.status}><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="available">Available</SelectItem>
@@ -230,6 +241,7 @@ export function PropertyForm({
                 <SelectItem value="rented">Rented</SelectItem>
               </SelectContent>
             </Select>
+            {errors.status && <p className="mt-1 text-xs text-destructive">{errors.status}</p>}
           </div>
         </CardContent>
       </Card>
@@ -240,23 +252,27 @@ export function PropertyForm({
           <div>
             <Label>State</Label>
             <Select value={form.state} onValueChange={(v) => setField("state", v)}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger className={selectErrorClass("state")} aria-invalid={!!errors.state}><SelectValue /></SelectTrigger>
               <SelectContent className="max-h-72">
                 {NIGERIAN_STATES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
               </SelectContent>
             </Select>
+            {errors.state && <p className="mt-1 text-xs text-destructive">{errors.state}</p>}
           </div>
           <div>
             <Label htmlFor="city">City / LGA</Label>
-            <Input id="city" value={form.city ?? ""} onChange={(e) => setField("city", e.target.value)} />
+            <Input id="city" value={form.city ?? ""} onChange={(e) => setField("city", e.target.value)} className={errorClass("city")} aria-invalid={!!errors.city} />
+            {errors.city && <p className="mt-1 text-xs text-destructive">{errors.city}</p>}
           </div>
           <div>
             <Label htmlFor="area">Area / Neighborhood</Label>
-            <Input id="area" value={form.area ?? ""} onChange={(e) => setField("area", e.target.value)} />
+            <Input id="area" value={form.area ?? ""} onChange={(e) => setField("area", e.target.value)} className={errorClass("area")} aria-invalid={!!errors.area} />
+            {errors.area && <p className="mt-1 text-xs text-destructive">{errors.area}</p>}
           </div>
           <div>
             <Label htmlFor="address">Street address</Label>
-            <Input id="address" value={form.address ?? ""} onChange={(e) => setField("address", e.target.value)} />
+            <Input id="address" value={form.address ?? ""} onChange={(e) => setField("address", e.target.value)} className={errorClass("address")} aria-invalid={!!errors.address} />
+            {errors.address && <p className="mt-1 text-xs text-destructive">{errors.address}</p>}
           </div>
         </CardContent>
       </Card>
@@ -267,7 +283,8 @@ export function PropertyForm({
           {(["bedrooms","bathrooms","toilets","parking","sqm","year_built"] as const).map((k) => (
             <div key={k}>
               <Label htmlFor={k}>{k === "sqm" ? "Size (sqm)" : k === "year_built" ? "Year built" : k[0].toUpperCase()+k.slice(1)}</Label>
-              <Input id={k} type="number" min={0} value={(form[k] as number | undefined) ?? ""} onChange={(e) => setField(k, e.target.value === "" ? undefined : Number(e.target.value))} />
+              <Input id={k} type="number" min={0} value={(form[k] as number | undefined) ?? ""} onChange={(e) => setField(k, e.target.value === "" ? undefined : Number(e.target.value))} className={errorClass(k)} aria-invalid={!!errors[k]} />
+              {errors[k] && <p className="mt-1 text-xs text-destructive">{errors[k]}</p>}
             </div>
           ))}
         </CardContent>
