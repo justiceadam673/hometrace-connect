@@ -136,6 +136,12 @@ export function PropertyForm({
       amenities,
     });
     if (!parsed.success) {
+      const next: Record<string, string> = {};
+      for (const issue of parsed.error.issues) {
+        const path = issue.path[0];
+        if (typeof path === "string" && !next[path]) next[path] = issue.message;
+      }
+      setErrors(next);
       toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
       return;
     }
