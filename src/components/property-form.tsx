@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { X, Upload, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { resolveImage, type PropertyRow } from "@/lib/properties";
 import { uploadPropertyImage } from "@/lib/dashboard";
 
