@@ -52,9 +52,12 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           {user ? (
             <>
-              <span className="hidden text-sm text-muted-foreground sm:inline">
-                {user.email?.split("@")[0]}
-              </span>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link to="/dashboard">Dashboard</Link>
+              </Button>
+              <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
+                <Link to="/properties/new">Post property</Link>
+              </Button>
               <Button
                 variant="ghost"
                 size="sm"
@@ -76,6 +79,7 @@ export function SiteHeader() {
               </Button>
             </>
           )}
+
           <button
             className="grid size-9 place-items-center rounded-md text-muted-foreground md:hidden"
             aria-label="Menu"
