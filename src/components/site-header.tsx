@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Home, Menu } from "lucide-react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth-context";
+import { myRolesQuery } from "@/lib/admin";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
   const { user, signOut } = useAuth();
+  const { data: roles } = useQuery(myRolesQuery(user?.id));
+  const isAdmin = (roles ?? []).includes("admin");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -59,6 +63,11 @@ export function SiteHeader() {
               <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
                 <Link to="/developer">Developer</Link>
               </Button>
+              {isAdmin ? (
+                <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+                  <Link to="/admin">Admin</Link>
+                </Button>
+              ) : null}
               <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
                 <Link to="/properties/new">Post property</Link>
               </Button>
