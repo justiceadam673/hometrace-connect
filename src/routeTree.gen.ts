@@ -18,10 +18,13 @@ import { Route as AuthenticatedDeveloperRouteImport } from './routes/_authentica
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDeveloperIndexRouteImport } from './routes/_authenticated/developer.index'
 import { Route as AuthenticatedPropertiesNewRouteImport } from './routes/_authenticated/properties.new'
+import { Route as AuthenticatedDeveloperTeamRouteImport } from './routes/_authenticated/developer.team'
 import { Route as AuthenticatedDeveloperProjectsRouteImport } from './routes/_authenticated/developer.projects'
 import { Route as AuthenticatedDeveloperProfileRouteImport } from './routes/_authenticated/developer.profile'
+import { Route as AuthenticatedDeveloperMarketingRouteImport } from './routes/_authenticated/developer.marketing'
 import { Route as AuthenticatedPropertiesIdEditRouteImport } from './routes/_authenticated/properties.$id.edit'
 import { Route as AuthenticatedDeveloperProjectsNewRouteImport } from './routes/_authenticated/developer.projects.new'
+import { Route as AuthenticatedDeveloperProjectsIdRouteImport } from './routes/_authenticated/developer.projects.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -69,6 +72,12 @@ const AuthenticatedPropertiesNewRoute =
     path: '/properties/new',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDeveloperTeamRoute =
+  AuthenticatedDeveloperTeamRouteImport.update({
+    id: '/team',
+    path: '/team',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
 const AuthenticatedDeveloperProjectsRoute =
   AuthenticatedDeveloperProjectsRouteImport.update({
     id: '/projects',
@@ -79,6 +88,12 @@ const AuthenticatedDeveloperProfileRoute =
   AuthenticatedDeveloperProfileRouteImport.update({
     id: '/profile',
     path: '/profile',
+    getParentRoute: () => AuthenticatedDeveloperRoute,
+  } as any)
+const AuthenticatedDeveloperMarketingRoute =
+  AuthenticatedDeveloperMarketingRouteImport.update({
+    id: '/marketing',
+    path: '/marketing',
     getParentRoute: () => AuthenticatedDeveloperRoute,
   } as any)
 const AuthenticatedPropertiesIdEditRoute =
@@ -93,6 +108,12 @@ const AuthenticatedDeveloperProjectsNewRoute =
     path: '/new',
     getParentRoute: () => AuthenticatedDeveloperProjectsRoute,
   } as any)
+const AuthenticatedDeveloperProjectsIdRoute =
+  AuthenticatedDeveloperProjectsIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedDeveloperProjectsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -101,10 +122,13 @@ export interface FileRoutesByFullPath {
   '/developer': typeof AuthenticatedDeveloperRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/developer/': typeof AuthenticatedDeveloperIndexRoute
+  '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
@@ -114,10 +138,13 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/properties': typeof PropertiesIndexRoute
+  '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/developer': typeof AuthenticatedDeveloperIndexRoute
+  '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
@@ -130,10 +157,13 @@ export interface FileRoutesById {
   '/_authenticated/developer': typeof AuthenticatedDeveloperRouteWithChildren
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
+  '/_authenticated/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/_authenticated/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/_authenticated/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  '/_authenticated/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/_authenticated/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/_authenticated/developer/': typeof AuthenticatedDeveloperIndexRoute
+  '/_authenticated/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/_authenticated/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/_authenticated/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
 }
@@ -146,10 +176,13 @@ export interface FileRouteTypes {
     | '/developer'
     | '/properties/$id'
     | '/properties/'
+    | '/developer/marketing'
     | '/developer/profile'
     | '/developer/projects'
+    | '/developer/team'
     | '/properties/new'
     | '/developer/'
+    | '/developer/projects/$id'
     | '/developer/projects/new'
     | '/properties/$id/edit'
   fileRoutesByTo: FileRoutesByTo
@@ -159,10 +192,13 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/properties/$id'
     | '/properties'
+    | '/developer/marketing'
     | '/developer/profile'
     | '/developer/projects'
+    | '/developer/team'
     | '/properties/new'
     | '/developer'
+    | '/developer/projects/$id'
     | '/developer/projects/new'
     | '/properties/$id/edit'
   id:
@@ -174,10 +210,13 @@ export interface FileRouteTypes {
     | '/_authenticated/developer'
     | '/properties/$id'
     | '/properties/'
+    | '/_authenticated/developer/marketing'
     | '/_authenticated/developer/profile'
     | '/_authenticated/developer/projects'
+    | '/_authenticated/developer/team'
     | '/_authenticated/properties/new'
     | '/_authenticated/developer/'
+    | '/_authenticated/developer/projects/$id'
     | '/_authenticated/developer/projects/new'
     | '/_authenticated/properties/$id/edit'
   fileRoutesById: FileRoutesById
@@ -255,6 +294,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPropertiesNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/developer/team': {
+      id: '/_authenticated/developer/team'
+      path: '/team'
+      fullPath: '/developer/team'
+      preLoaderRoute: typeof AuthenticatedDeveloperTeamRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
     '/_authenticated/developer/projects': {
       id: '/_authenticated/developer/projects'
       path: '/projects'
@@ -267,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/developer/profile'
       preLoaderRoute: typeof AuthenticatedDeveloperProfileRouteImport
+      parentRoute: typeof AuthenticatedDeveloperRoute
+    }
+    '/_authenticated/developer/marketing': {
+      id: '/_authenticated/developer/marketing'
+      path: '/marketing'
+      fullPath: '/developer/marketing'
+      preLoaderRoute: typeof AuthenticatedDeveloperMarketingRouteImport
       parentRoute: typeof AuthenticatedDeveloperRoute
     }
     '/_authenticated/properties/$id/edit': {
@@ -283,15 +336,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDeveloperProjectsNewRouteImport
       parentRoute: typeof AuthenticatedDeveloperProjectsRoute
     }
+    '/_authenticated/developer/projects/$id': {
+      id: '/_authenticated/developer/projects/$id'
+      path: '/$id'
+      fullPath: '/developer/projects/$id'
+      preLoaderRoute: typeof AuthenticatedDeveloperProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedDeveloperProjectsRoute
+    }
   }
 }
 
 interface AuthenticatedDeveloperProjectsRouteChildren {
+  AuthenticatedDeveloperProjectsIdRoute: typeof AuthenticatedDeveloperProjectsIdRoute
   AuthenticatedDeveloperProjectsNewRoute: typeof AuthenticatedDeveloperProjectsNewRoute
 }
 
 const AuthenticatedDeveloperProjectsRouteChildren: AuthenticatedDeveloperProjectsRouteChildren =
   {
+    AuthenticatedDeveloperProjectsIdRoute:
+      AuthenticatedDeveloperProjectsIdRoute,
     AuthenticatedDeveloperProjectsNewRoute:
       AuthenticatedDeveloperProjectsNewRoute,
   }
@@ -302,16 +365,20 @@ const AuthenticatedDeveloperProjectsRouteWithChildren =
   )
 
 interface AuthenticatedDeveloperRouteChildren {
+  AuthenticatedDeveloperMarketingRoute: typeof AuthenticatedDeveloperMarketingRoute
   AuthenticatedDeveloperProfileRoute: typeof AuthenticatedDeveloperProfileRoute
   AuthenticatedDeveloperProjectsRoute: typeof AuthenticatedDeveloperProjectsRouteWithChildren
+  AuthenticatedDeveloperTeamRoute: typeof AuthenticatedDeveloperTeamRoute
   AuthenticatedDeveloperIndexRoute: typeof AuthenticatedDeveloperIndexRoute
 }
 
 const AuthenticatedDeveloperRouteChildren: AuthenticatedDeveloperRouteChildren =
   {
+    AuthenticatedDeveloperMarketingRoute: AuthenticatedDeveloperMarketingRoute,
     AuthenticatedDeveloperProfileRoute: AuthenticatedDeveloperProfileRoute,
     AuthenticatedDeveloperProjectsRoute:
       AuthenticatedDeveloperProjectsRouteWithChildren,
+    AuthenticatedDeveloperTeamRoute: AuthenticatedDeveloperTeamRoute,
     AuthenticatedDeveloperIndexRoute: AuthenticatedDeveloperIndexRoute,
   }
 
