@@ -267,7 +267,7 @@ export function PropertyForm({
           {(["bedrooms","bathrooms","toilets","parking","sqm","year_built"] as const).map((k) => (
             <div key={k}>
               <Label htmlFor={k}>{k === "sqm" ? "Size (sqm)" : k === "year_built" ? "Year built" : k[0].toUpperCase()+k.slice(1)}</Label>
-              <Input id={k} type="number" min={0} value={(form[k] as number | undefined) ?? ""} onChange={(e) => set(k, e.target.value === "" ? undefined : Number(e.target.value))} />
+              <Input id={k} type="number" min={0} value={(form[k] as number | undefined) ?? ""} onChange={(e) => setField(k, e.target.value === "" ? undefined : Number(e.target.value))} />
             </div>
           ))}
         </CardContent>
