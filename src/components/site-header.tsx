@@ -64,8 +64,8 @@ export function SiteHeader() {
                 <Link to="/developer">Developer</Link>
               </Button>
               {isAdmin ? (
-                <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
-                  <Link to="/admin">Admin</Link>
+                <Button asChild size="sm" variant="outline" className="hidden md:inline-flex border-primary/40 text-primary hover:bg-primary/10 hover:text-primary">
+                  <Link to="/admin"><ShieldCheck className="mr-1 size-4" /> Admin</Link>
                 </Button>
               ) : null}
               <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
