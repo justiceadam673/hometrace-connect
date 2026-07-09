@@ -206,25 +206,57 @@ function PropertyDetail() {
           {/* Sidebar */}
           <aside className="md:sticky md:top-24 md:self-start">
             <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-elegant">
-              <div className="flex items-center gap-3">
-                <div className="grid size-12 place-items-center rounded-full bg-primary-soft text-primary text-sm font-semibold">
-                  HT
+            <div className="flex items-center gap-3">
+                <div className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-full bg-primary-soft text-primary text-sm font-semibold">
+                  {agent?.avatar_url ? (
+                    <img src={agent.avatar_url} alt={agentName} className="size-full object-cover" />
+                  ) : agent ? (
+                    agentInitials
+                  ) : (
+                    <UserIcon className="size-5" />
+                  )}
                 </div>
-                <div>
-                  <p className="text-sm font-semibold">HomeTrace Verified Agent</p>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold">{agentName}</p>
                   <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <ShieldCheck className="size-3 text-primary" /> Verified · Responds within 24h
+                    <ShieldCheck className="size-3 text-primary" />
+                    {agent?.company ? agent.company : "Verified · Responds within 24h"}
                   </p>
                 </div>
               </div>
 
               <div className="mt-6 space-y-2">
-                <Button className="w-full" size="lg" onClick={() => toast("Sign in to chat with the agent", { description: "Create a free account to start a conversation." })}>
-                  <MessageCircle className="size-4" /> Chat with agent
-                </Button>
-                <Button variant="outline" className="w-full" size="lg" onClick={() => toast("Sign in to reveal contact details")}>
-                  <Phone className="size-4" /> Call agent
-                </Button>
+                {waHref ? (
+                  <Button asChild className="w-full" size="lg">
+                    <a href={waHref} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="size-4" /> Chat on WhatsApp
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    className="w-full"
+                    size="lg"
+                    onClick={() => toast("Agent hasn't added a WhatsApp number yet")}
+                  >
+                    <MessageCircle className="size-4" /> Chat with agent
+                  </Button>
+                )}
+                {telHref ? (
+                  <Button asChild variant="outline" className="w-full" size="lg">
+                    <a href={telHref}>
+                      <Phone className="size-4" /> Call agent
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    size="lg"
+                    onClick={() => toast("Agent hasn't added a phone number yet")}
+                  >
+                    <Phone className="size-4" /> Call agent
+                  </Button>
+                )}
                 <Button
                   variant="outline"
                   className="w-full"
