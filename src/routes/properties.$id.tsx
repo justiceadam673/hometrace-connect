@@ -63,11 +63,19 @@ export const Route = createFileRoute("/properties/$id")({
 function PropertyDetail() {
   const params = Route.useParams();
   const { data: property } = useSuspenseQuery(propertyByIdQuery(params.id));
+  const { data: agent } = useQuery(profileByIdQuery(property?.agent_id));
   if (!property) return null;
 
   const img = resolveImage(property.cover_image);
   const location = [property.area, property.city, property.state].filter(Boolean).join(", ");
   const priceSuffix = property.listing_type === "rent" ? " /year" : property.listing_type === "shortlet" ? " /night" : "";
+  const agentName = agent?.full_name || "HomeTrace Verified Agent";
+  const agentInitials = (agentName.match(/\b\w/g) ?? ["H", "T"]).slice(0, 2).join("").toUpperCase();
+  const waHref = waLink(
+    agent?.whatsapp_number || agent?.phone,
+    `Hi ${agent?.full_name ?? ""}, I'm interested in your listing "${property.title}" on HomeTrace.`,
+  );
+  const telHref = telLink(agent?.phone || agent?.whatsapp_number);
 
   return (
     <div className="min-h-screen bg-background">
