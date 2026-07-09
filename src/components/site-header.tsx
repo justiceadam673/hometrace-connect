@@ -116,6 +116,7 @@ export function SiteHeader() {
               <>
                 <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Dashboard</Link>
                 <Link to="/developer" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Developer</Link>
+                <Link to="/profile" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Profile</Link>
                 {isAdmin ? (
                   <Link to="/admin" className="rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/15" onClick={() => setOpen(false)}>Admin</Link>
                 ) : null}
