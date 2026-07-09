@@ -43,12 +43,13 @@ function AuthPage() {
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin,
+            emailRedirectTo: `${window.location.origin}/email-verified`,
             data: { full_name: fullName },
           },
         });
         if (error) throw error;
-        toast.success("Check your email to confirm your account");
+        toast.success("Check your email for a verification link");
+
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
