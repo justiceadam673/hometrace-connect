@@ -15,6 +15,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIndexRouteImport } from './routes/properties.index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedDeveloperRouteImport } from './routes/_authenticated/developer'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -64,6 +65,11 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
   id: '/properties/$id',
   path: '/properties/$id',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDeveloperRoute = AuthenticatedDeveloperRouteImport.update({
   id: '/developer',
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/developer': typeof AuthenticatedDeveloperRouteWithChildren
+  '/profile': typeof AuthenticatedProfileRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
   '/admin/agents': typeof AuthenticatedAdminAgentsRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/email-verified': typeof EmailVerifiedRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/properties': typeof PropertiesIndexRoute
   '/admin/agents': typeof AuthenticatedAdminAgentsRoute
@@ -240,6 +248,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/developer': typeof AuthenticatedDeveloperRouteWithChildren
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/properties/': typeof PropertiesIndexRoute
   '/_authenticated/admin/agents': typeof AuthenticatedAdminAgentsRoute
@@ -269,6 +278,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/developer'
+    | '/profile'
     | '/properties/$id'
     | '/properties/'
     | '/admin/agents'
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/email-verified'
     | '/dashboard'
+    | '/profile'
     | '/properties/$id'
     | '/properties'
     | '/admin/agents'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/_authenticated/developer'
+    | '/_authenticated/profile'
     | '/properties/$id'
     | '/properties/'
     | '/_authenticated/admin/agents'
@@ -395,6 +407,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/properties/$id'
       preLoaderRoute: typeof PropertiesIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/developer': {
       id: '/_authenticated/developer'
@@ -609,6 +628,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeveloperRoute: typeof AuthenticatedDeveloperRouteWithChildren
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedPropertiesNewRoute: typeof AuthenticatedPropertiesNewRoute
   AuthenticatedPropertiesIdEditRoute: typeof AuthenticatedPropertiesIdEditRoute
 }
@@ -617,6 +637,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeveloperRoute: AuthenticatedDeveloperRouteWithChildren,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedPropertiesNewRoute: AuthenticatedPropertiesNewRoute,
   AuthenticatedPropertiesIdEditRoute: AuthenticatedPropertiesIdEditRoute,
 }
