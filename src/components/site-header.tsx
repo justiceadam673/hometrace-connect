@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Home, Menu } from "lucide-react";
+import { Home, Menu, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth-context";
@@ -63,9 +63,12 @@ export function SiteHeader() {
               <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
                 <Link to="/developer">Developer</Link>
               </Button>
+              <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+                <Link to="/profile">Profile</Link>
+              </Button>
               {isAdmin ? (
-                <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
-                  <Link to="/admin">Admin</Link>
+                <Button asChild size="sm" variant="outline" className="hidden md:inline-flex border-primary/40 text-primary hover:bg-primary/10 hover:text-primary">
+                  <Link to="/admin"><ShieldCheck className="mr-1 size-4" /> Admin</Link>
                 </Button>
               ) : null}
               <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
@@ -112,6 +115,11 @@ export function SiteHeader() {
             {user ? (
               <>
                 <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Dashboard</Link>
+                <Link to="/developer" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Developer</Link>
+                <Link to="/profile" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Profile</Link>
+                {isAdmin ? (
+                  <Link to="/admin" className="rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/15" onClick={() => setOpen(false)}>Admin</Link>
+                ) : null}
                 <Link to="/properties/new" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Post property</Link>
               </>
             ) : (
