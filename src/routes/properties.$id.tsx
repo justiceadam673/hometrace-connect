@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery } from "@tanstack/react-query";
 import {
   ArrowLeft,
   Bath,
@@ -15,11 +15,13 @@ import {
   Share2,
   ShieldCheck,
   Sparkles,
+  User as UserIcon,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { propertyByIdQuery, resolveImage } from "@/lib/properties";
+import { profileByIdQuery, waLink, telLink } from "@/lib/profile";
 import { formatNairaFull } from "@/lib/format";
 import { toast } from "sonner";
 
