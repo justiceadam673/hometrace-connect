@@ -1,15 +1,13 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, Building2, Home as HomeIcon, LandPlot, MapPin, Search, ShieldCheck, Sparkles, Store, Warehouse } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Building2, Home as HomeIcon, LandPlot, ShieldCheck, Store, Warehouse } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PropertyCard } from "@/components/property-card";
 import { propertiesQuery } from "@/lib/properties";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import heroImage from "@/assets/hero-property.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
