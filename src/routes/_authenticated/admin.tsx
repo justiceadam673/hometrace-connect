@@ -1,7 +1,14 @@
 import { createFileRoute, Link, Outlet, useRouterState, redirect } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
-  LayoutDashboard, Users, ShieldCheck, ListChecks, Flag, Megaphone, BookOpen, HelpCircle,
+  LayoutDashboard,
+  Users,
+  ShieldCheck,
+  ListChecks,
+  Flag,
+  Megaphone,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { myRolesQuery } from "@/lib/admin";
@@ -12,7 +19,10 @@ export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: async () => {
     const { data } = await supabase.auth.getUser();
     if (!data.user) throw redirect({ to: "/auth" });
-    const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", data.user.id);
     const isAdmin = (roles ?? []).some((r) => r.role === "admin");
     if (!isAdmin) throw redirect({ to: "/dashboard" });
   },
@@ -28,6 +38,7 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin/announcements", label: "Announcements", icon: Megaphone },
   { to: "/admin/blog", label: "Blog", icon: BookOpen },
   { to: "/admin/faqs", label: "FAQs", icon: HelpCircle },
+  { to: "/dashboard", label: "Exit Admin", icon: ShieldCheck },
 ];
 
 function AdminLayout() {
@@ -51,7 +62,9 @@ function AdminLayout() {
               to={n.to}
               className={cn(
                 "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                active
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               <Icon className="size-4" />
