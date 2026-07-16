@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { ChevronLeft, Loader2, ShieldAlert } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -19,12 +18,6 @@ function NewPropertyPage() {
   const navigate = useNavigate();
   const { data: agent, isLoading } = useQuery(myAgentQuery(user?.id));
 
-  useEffect(() => {
-    if (!user || isLoading) return;
-    if (!isAgentKycSubmitted(agent)) {
-      // no-op: we render the gate below
-    }
-  }, [user, agent, isLoading]);
 
   if (!user) return null;
 
