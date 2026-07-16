@@ -33,14 +33,8 @@ const CATEGORIES = [
   { label: "Warehouse", type: "warehouse", icon: Warehouse },
 ] as const;
 
-const NIGERIAN_STATES = ["Lagos", "FCT", "Rivers", "Oyo", "Kano", "Ogun", "Enugu"];
-
 function LandingPage() {
   const { data: featured } = useSuspenseQuery(propertiesQuery({ featured: true }));
-  const navigate = useNavigate();
-  const [q, setQ] = useState("");
-  const [state, setState] = useState<string>("all");
-  const [type, setType] = useState<string>("all");
 
   return (
     <div className="min-h-screen bg-background">
@@ -57,75 +51,29 @@ function LandingPage() {
               height={1080}
               className="aspect-[16/10] w-full object-cover md:aspect-[21/9]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-            <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-14">
-              <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center md:p-14">
+              <span className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-white backdrop-blur">
                 <ShieldCheck className="size-3.5" />
-                Nigeria's verified marketplace
+                Nigeria's verified property marketplace
               </span>
-              <h1 className="max-w-3xl text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
-                Discover homes where trust is the foundation.
+              <h1 className="text-balance text-6xl font-bold tracking-tight text-white drop-shadow-md md:text-8xl lg:text-9xl">
+                HOMETRACE
               </h1>
-              <p className="mt-4 max-w-xl text-pretty text-sm text-white/80 md:text-base">
-                Every listing on HomeTrace is verified. Connect directly with vetted agents and top developers across Lagos, Abuja, Port Harcourt and beyond.
+              <p className="mt-6 max-w-2xl text-pretty text-base font-medium text-white/95 md:text-xl">
+                Verified homes, land and developments — connecting buyers directly with vetted agents and trusted developers across Nigeria.
               </p>
-
-              {/* Floating search */}
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  navigate({
-                    to: "/properties",
-                    search: {
-                      q: q || undefined,
-                      state: state !== "all" ? state : undefined,
-                      property_type: type !== "all" ? type : undefined,
-                    },
-                  });
-                }}
-                className="mt-8 flex max-w-4xl flex-col gap-2 rounded-2xl bg-background p-2 shadow-elegant ring-1 ring-black/5 md:flex-row md:items-center"
-              >
-                <div className="flex flex-1 items-center gap-3 border-b border-border px-4 py-3 md:border-b-0 md:border-r">
-                  <Search className="size-4 shrink-0 text-muted-foreground" />
-                  <Input
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    placeholder="Location, estate or LGA"
-                    className="border-0 bg-transparent p-0 text-sm shadow-none focus-visible:ring-0"
-                  />
-                </div>
-                <div className="flex-1 px-2 py-1 md:border-r md:border-border">
-                  <Select value={state} onValueChange={setState}>
-                    <SelectTrigger className="border-0 bg-transparent shadow-none focus:ring-0">
-                      <SelectValue placeholder="Any state" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Any state</SelectItem>
-                      {NIGERIAN_STATES.map((s) => (
-                        <SelectItem key={s} value={s}>{s === "FCT" ? "Abuja (FCT)" : s}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex-1 px-2 py-1">
-                  <Select value={type} onValueChange={setType}>
-                    <SelectTrigger className="border-0 bg-transparent shadow-none focus:ring-0">
-                      <SelectValue placeholder="Property type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Any type</SelectItem>
-                      <SelectItem value="house">House</SelectItem>
-                      <SelectItem value="duplex">Duplex</SelectItem>
-                      <SelectItem value="apartment">Apartment</SelectItem>
-                      <SelectItem value="land">Land</SelectItem>
-                      <SelectItem value="commercial">Commercial</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button type="submit" size="lg" className="rounded-xl">
-                  Search properties
+              <p className="mt-3 max-w-xl text-pretty text-sm text-white/75 md:text-base">
+                Every listing is KYC-checked. Every agent is background-verified. Every transaction, traceable.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <Button asChild size="lg" className="rounded-full px-8">
+                  <Link to="/properties" search={{}}>Browse properties</Link>
                 </Button>
-              </form>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-white/40 bg-white/10 px-8 text-white backdrop-blur hover:bg-white/20 hover:text-white">
+                  <Link to="/auth">Join HomeTrace</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -133,6 +81,7 @@ function LandingPage() {
 
       {/* Categories */}
       <section className="border-y border-border/60 bg-background">
+
         <div className="mx-auto max-w-7xl px-6 py-8">
           <div className="flex items-center gap-8 overflow-x-auto pb-1">
             {CATEGORIES.map((cat) => (
