@@ -17,11 +17,18 @@ export type Database = {
       agents: {
         Row: {
           bio: string | null
+          business_name: string | null
+          cofo_document_url: string | null
           company: string | null
           created_at: string
           id: string
+          id_selfie_url: string | null
+          kyc_address: string | null
+          kyc_submitted_at: string | null
           languages: string[] | null
           license_number: string | null
+          nin_document_url: string | null
+          nin_number: string | null
           rating: number | null
           response_time_hours: number | null
           review_count: number | null
@@ -30,11 +37,18 @@ export type Database = {
         }
         Insert: {
           bio?: string | null
+          business_name?: string | null
+          cofo_document_url?: string | null
           company?: string | null
           created_at?: string
           id: string
+          id_selfie_url?: string | null
+          kyc_address?: string | null
+          kyc_submitted_at?: string | null
           languages?: string[] | null
           license_number?: string | null
+          nin_document_url?: string | null
+          nin_number?: string | null
           rating?: number | null
           response_time_hours?: number | null
           review_count?: number | null
@@ -43,11 +57,18 @@ export type Database = {
         }
         Update: {
           bio?: string | null
+          business_name?: string | null
+          cofo_document_url?: string | null
           company?: string | null
           created_at?: string
           id?: string
+          id_selfie_url?: string | null
+          kyc_address?: string | null
+          kyc_submitted_at?: string | null
           languages?: string[] | null
           license_number?: string | null
+          nin_document_url?: string | null
+          nin_number?: string | null
           rating?: number | null
           response_time_hours?: number | null
           review_count?: number | null

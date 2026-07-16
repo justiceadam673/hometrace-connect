@@ -26,6 +26,7 @@ import { Route as AuthenticatedDeveloperTeamRouteImport } from './routes/_authen
 import { Route as AuthenticatedDeveloperProjectsRouteImport } from './routes/_authenticated/developer.projects'
 import { Route as AuthenticatedDeveloperProfileRouteImport } from './routes/_authenticated/developer.profile'
 import { Route as AuthenticatedDeveloperMarketingRouteImport } from './routes/_authenticated/developer.marketing'
+import { Route as AuthenticatedAgentVerificationRouteImport } from './routes/_authenticated/agent.verification'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin.users'
 import { Route as AuthenticatedAdminReportsRouteImport } from './routes/_authenticated/admin.reports'
 import { Route as AuthenticatedAdminListingsRouteImport } from './routes/_authenticated/admin.listings'
@@ -127,6 +128,12 @@ const AuthenticatedDeveloperMarketingRoute =
     path: '/marketing',
     getParentRoute: () => AuthenticatedDeveloperRoute,
   } as any)
+const AuthenticatedAgentVerificationRoute =
+  AuthenticatedAgentVerificationRouteImport.update({
+    id: '/agent/verification',
+    path: '/agent/verification',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -202,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/admin/reports': typeof AuthenticatedAdminReportsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/agent/verification': typeof AuthenticatedAgentVerificationRoute
   '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
@@ -228,6 +236,7 @@ export interface FileRoutesByTo {
   '/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/admin/reports': typeof AuthenticatedAdminReportsRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/agent/verification': typeof AuthenticatedAgentVerificationRoute
   '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
@@ -258,6 +267,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/_authenticated/admin/reports': typeof AuthenticatedAdminReportsRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/_authenticated/agent/verification': typeof AuthenticatedAgentVerificationRoute
   '/_authenticated/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/_authenticated/developer/profile': typeof AuthenticatedDeveloperProfileRoute
   '/_authenticated/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
@@ -288,6 +298,7 @@ export interface FileRouteTypes {
     | '/admin/listings'
     | '/admin/reports'
     | '/admin/users'
+    | '/agent/verification'
     | '/developer/marketing'
     | '/developer/profile'
     | '/developer/projects'
@@ -314,6 +325,7 @@ export interface FileRouteTypes {
     | '/admin/listings'
     | '/admin/reports'
     | '/admin/users'
+    | '/agent/verification'
     | '/developer/marketing'
     | '/developer/profile'
     | '/developer/projects'
@@ -343,6 +355,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/listings'
     | '/_authenticated/admin/reports'
     | '/_authenticated/admin/users'
+    | '/_authenticated/agent/verification'
     | '/_authenticated/developer/marketing'
     | '/_authenticated/developer/profile'
     | '/_authenticated/developer/projects'
@@ -484,6 +497,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/developer/marketing'
       preLoaderRoute: typeof AuthenticatedDeveloperMarketingRouteImport
       parentRoute: typeof AuthenticatedDeveloperRoute
+    }
+    '/_authenticated/agent/verification': {
+      id: '/_authenticated/agent/verification'
+      path: '/agent/verification'
+      fullPath: '/agent/verification'
+      preLoaderRoute: typeof AuthenticatedAgentVerificationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/users': {
       id: '/_authenticated/admin/users'
@@ -629,6 +649,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDeveloperRoute: typeof AuthenticatedDeveloperRouteWithChildren
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedAgentVerificationRoute: typeof AuthenticatedAgentVerificationRoute
   AuthenticatedPropertiesNewRoute: typeof AuthenticatedPropertiesNewRoute
   AuthenticatedPropertiesIdEditRoute: typeof AuthenticatedPropertiesIdEditRoute
 }
@@ -638,6 +659,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDeveloperRoute: AuthenticatedDeveloperRouteWithChildren,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedAgentVerificationRoute: AuthenticatedAgentVerificationRoute,
   AuthenticatedPropertiesNewRoute: AuthenticatedPropertiesNewRoute,
   AuthenticatedPropertiesIdEditRoute: AuthenticatedPropertiesIdEditRoute,
 }
@@ -656,13 +678,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
