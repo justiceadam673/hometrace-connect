@@ -18,6 +18,7 @@ import {
   User as UserIcon,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+import { PayWithPaystack } from "@/components/pay-with-paystack";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { propertyByIdQuery, resolveImage } from "@/lib/properties";
@@ -226,6 +227,12 @@ function PropertyDetail() {
               </div>
 
               <div className="mt-6 space-y-2">
+                <PayWithPaystack
+                  propertyId={property.id}
+                  price={Number(property.price)}
+                  listingType={property.listing_type as "buy" | "rent" | "shortlet"}
+                />
+
                 {waHref ? (
                   <Button asChild className="w-full" size="lg">
                     <a href={waHref} target="_blank" rel="noopener noreferrer">
