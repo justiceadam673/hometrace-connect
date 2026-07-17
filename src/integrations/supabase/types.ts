@@ -308,6 +308,74 @@ export type Database = {
           },
         ]
       }
+      payments: {
+        Row: {
+          agent_disbursement: number
+          agent_id: string | null
+          buyer_email: string | null
+          buyer_id: string
+          charged_amount: number
+          created_at: string
+          currency: string
+          displayed_amount: number
+          id: string
+          listing_type: string
+          metadata: Json | null
+          payment_plan: string
+          paystack_response: Json | null
+          property_id: string | null
+          reference: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          agent_disbursement: number
+          agent_id?: string | null
+          buyer_email?: string | null
+          buyer_id: string
+          charged_amount: number
+          created_at?: string
+          currency?: string
+          displayed_amount: number
+          id?: string
+          listing_type: string
+          metadata?: Json | null
+          payment_plan: string
+          paystack_response?: Json | null
+          property_id?: string | null
+          reference: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          agent_disbursement?: number
+          agent_id?: string | null
+          buyer_email?: string | null
+          buyer_id?: string
+          charged_amount?: number
+          created_at?: string
+          currency?: string
+          displayed_amount?: number
+          id?: string
+          listing_type?: string
+          metadata?: Json | null
+          payment_plan?: string
+          paystack_response?: Json | null
+          property_id?: string | null
+          reference?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
