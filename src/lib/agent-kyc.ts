@@ -36,6 +36,27 @@ export function myAgentQuery(userId: string | undefined) {
   });
 }
 
+export function agentVerificationByIdQuery(userId: string | null | undefined) {
+  return queryOptions({
+    queryKey: ["agent-verification", userId],
+    queryFn: async (): Promise<"unverified" | "pending" | "verified" | null> => {
+      if (!userId) return null;
+      const { data, error } = await supabase
+        .from("agents")
+        .select("verification")
+        .eq("id", userId)
+        .maybeSingle();
+      if (error) throw error;
+      return (data?.verification ?? null) as "unverified" | "pending" | "verified" | null;
+    },
+    enabled: !!userId,
+  });
+}
+
 export function isAgentKycSubmitted(agent: AgentRow | null | undefined) {
   return !!agent?.kyc_submitted_at;
+}
+
+export function isAgentVerified(agent: AgentRow | null | undefined) {
+  return agent?.verification === "verified";
 }
