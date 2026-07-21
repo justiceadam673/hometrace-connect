@@ -221,10 +221,16 @@ function PropertyDetail() {
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{agentName}</p>
+                  <div className="flex items-center gap-1.5">
+                    <p className="truncate text-sm font-semibold">{agentName}</p>
+                    {isAgentVerified ? (
+                      <span title="Verified by HomeTrace" className="inline-flex items-center gap-0.5 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        <ShieldCheck className="size-3" /> Verified
+                      </span>
+                    ) : null}
+                  </div>
                   <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <ShieldCheck className="size-3 text-primary" />
-                    {agent?.company ? agent.company : "Verified · Responds within 24h"}
+                    {agent?.company ? agent.company : isAgentVerified ? "Verified · Responds within 24h" : "Independent agent"}
                   </p>
                 </div>
               </div>
