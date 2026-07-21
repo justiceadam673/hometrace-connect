@@ -31,6 +31,7 @@ import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminReportsRouteImport } from './routes/_authenticated/admin.reports'
 import { Route as AuthenticatedAdminListingsRouteImport } from './routes/_authenticated/admin.listings'
 import { Route as AuthenticatedAdminFaqsRouteImport } from './routes/_authenticated/admin.faqs'
+import { Route as AuthenticatedAdminDevelopersRouteImport } from './routes/_authenticated/admin.developers'
 import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin.blog'
 import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin.announcements'
 import { Route as AuthenticatedAdminAgentsRouteImport } from './routes/_authenticated/admin.agents'
@@ -156,6 +157,12 @@ const AuthenticatedAdminFaqsRoute = AuthenticatedAdminFaqsRouteImport.update({
   path: '/faqs',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminDevelopersRoute =
+  AuthenticatedAdminDevelopersRouteImport.update({
+    id: '/developers',
+    path: '/developers',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminBlogRoute = AuthenticatedAdminBlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -205,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/admin/agents': typeof AuthenticatedAdminAgentsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
+  '/admin/developers': typeof AuthenticatedAdminDevelopersRoute
   '/admin/faqs': typeof AuthenticatedAdminFaqsRoute
   '/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/admin/reports': typeof AuthenticatedAdminReportsRoute
@@ -232,6 +240,7 @@ export interface FileRoutesByTo {
   '/admin/agents': typeof AuthenticatedAdminAgentsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
+  '/admin/developers': typeof AuthenticatedAdminDevelopersRoute
   '/admin/faqs': typeof AuthenticatedAdminFaqsRoute
   '/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/admin/reports': typeof AuthenticatedAdminReportsRoute
@@ -263,6 +272,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/agents': typeof AuthenticatedAdminAgentsRoute
   '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRoute
+  '/_authenticated/admin/developers': typeof AuthenticatedAdminDevelopersRoute
   '/_authenticated/admin/faqs': typeof AuthenticatedAdminFaqsRoute
   '/_authenticated/admin/listings': typeof AuthenticatedAdminListingsRoute
   '/_authenticated/admin/reports': typeof AuthenticatedAdminReportsRoute
@@ -294,6 +304,7 @@ export interface FileRouteTypes {
     | '/admin/agents'
     | '/admin/announcements'
     | '/admin/blog'
+    | '/admin/developers'
     | '/admin/faqs'
     | '/admin/listings'
     | '/admin/reports'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/admin/agents'
     | '/admin/announcements'
     | '/admin/blog'
+    | '/admin/developers'
     | '/admin/faqs'
     | '/admin/listings'
     | '/admin/reports'
@@ -351,6 +363,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/agents'
     | '/_authenticated/admin/announcements'
     | '/_authenticated/admin/blog'
+    | '/_authenticated/admin/developers'
     | '/_authenticated/admin/faqs'
     | '/_authenticated/admin/listings'
     | '/_authenticated/admin/reports'
@@ -533,6 +546,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminFaqsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/developers': {
+      id: '/_authenticated/admin/developers'
+      path: '/developers'
+      fullPath: '/admin/developers'
+      preLoaderRoute: typeof AuthenticatedAdminDevelopersRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/blog': {
       id: '/_authenticated/admin/blog'
       path: '/blog'
@@ -582,6 +602,7 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAgentsRoute: typeof AuthenticatedAdminAgentsRoute
   AuthenticatedAdminAnnouncementsRoute: typeof AuthenticatedAdminAnnouncementsRoute
   AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRoute
+  AuthenticatedAdminDevelopersRoute: typeof AuthenticatedAdminDevelopersRoute
   AuthenticatedAdminFaqsRoute: typeof AuthenticatedAdminFaqsRoute
   AuthenticatedAdminListingsRoute: typeof AuthenticatedAdminListingsRoute
   AuthenticatedAdminReportsRoute: typeof AuthenticatedAdminReportsRoute
@@ -593,6 +614,7 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAgentsRoute: AuthenticatedAdminAgentsRoute,
   AuthenticatedAdminAnnouncementsRoute: AuthenticatedAdminAnnouncementsRoute,
   AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRoute,
+  AuthenticatedAdminDevelopersRoute: AuthenticatedAdminDevelopersRoute,
   AuthenticatedAdminFaqsRoute: AuthenticatedAdminFaqsRoute,
   AuthenticatedAdminListingsRoute: AuthenticatedAdminListingsRoute,
   AuthenticatedAdminReportsRoute: AuthenticatedAdminReportsRoute,
