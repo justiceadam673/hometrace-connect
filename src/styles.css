@@ -123,7 +123,7 @@
 @layer base {
   * {
     border-color: var(--color-border);
-    display: none;
+    /* display: none; */
   }
   body {
     background-color: var(--color-background);
