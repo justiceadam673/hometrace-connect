@@ -77,7 +77,22 @@ export function adminAgentsQuery() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("agents")
-        .select("id, company, verification, rating, review_count, years_experience, license_number, created_at, profiles!inner(full_name, avatar_url, phone)")
+        .select("id, company, verification, rating, review_count, years_experience, license_number, business_name, nin_number, kyc_address, nin_document_url, cofo_document_url, id_selfie_url, kyc_submitted_at, bio, created_at, profiles!inner(full_name, avatar_url, phone)")
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
+export function adminDevelopersQuery() {
+  return queryOptions({
+    queryKey: ["admin-developers"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("developers")
+        .select("id, company_name, logo_url, website, email, phone, headquarters, established_year, description, verification, featured, created_at, profiles!developers_id_fkey(full_name, avatar_url, phone)")
         .order("created_at", { ascending: false })
         .limit(200);
       if (error) throw error;
