@@ -23,6 +23,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { propertyByIdQuery, resolveImage } from "@/lib/properties";
 import { profileByIdQuery, waLink, telLink } from "@/lib/profile";
+import { agentVerificationByIdQuery } from "@/lib/agent-kyc";
 import { formatNairaFull } from "@/lib/format";
 import { toast } from "sonner";
 
@@ -65,12 +66,14 @@ function PropertyDetail() {
   const params = Route.useParams();
   const { data: property } = useSuspenseQuery(propertyByIdQuery(params.id));
   const { data: agent } = useQuery(profileByIdQuery(property?.agent_id));
+  const { data: agentVerification } = useQuery(agentVerificationByIdQuery(property?.agent_id));
   if (!property) return null;
 
+  const isAgentVerified = agentVerification === "verified";
   const img = resolveImage(property.cover_image);
   const location = [property.area, property.city, property.state].filter(Boolean).join(", ");
   const priceSuffix = property.listing_type === "rent" ? " /year" : property.listing_type === "shortlet" ? " /night" : "";
-  const agentName = agent?.full_name || "HomeTrace Verified Agent";
+  const agentName = agent?.full_name || "HomeTrace Agent";
   const agentInitials = (agentName.match(/\b\w/g) ?? ["H", "T"]).slice(0, 2).join("").toUpperCase();
   const waHref = waLink(
     agent?.whatsapp_number || agent?.phone,
