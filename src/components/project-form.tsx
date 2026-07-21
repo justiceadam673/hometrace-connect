@@ -20,8 +20,43 @@ import { uploadPropertyImage } from "@/lib/dashboard";
 import type { Project, ProjectStatus } from "@/lib/developers";
 
 const STATES = [
-  "Lagos", "Abuja (FCT)", "Rivers", "Oyo", "Kano", "Kaduna", "Enugu", "Delta",
-  "Edo", "Anambra", "Ogun", "Cross River", "Akwa Ibom", "Imo", "Plateau",
+  "Abia",
+  "Adamawa",
+  "Akwa Ibom",
+  "Anambra",
+  "Bauchi",
+  "Bayelsa",
+  "Benue",
+  "Borno",
+  "Cross River",
+  "Delta",
+  "Ebonyi",
+  "Edo",
+  "Ekiti",
+  "Enugu",
+  "FCT (Abuja)",
+  "Gombe",
+  "Imo",
+  "Jigawa",
+  "Kaduna",
+  "Kano",
+  "Katsina",
+  "Kebbi",
+  "Kogi",
+  "Kwara",
+  "Lagos",
+  "Nasarawa",
+  "Niger",
+  "Ogun",
+  "Ondo",
+  "Osun",
+  "Oyo",
+  "Plateau",
+  "Rivers",
+  "Sokoto",
+  "Taraba",
+  "Yobe",
+  "Zamfara",
 ];
 
 const STATUSES: { value: ProjectStatus; label: string }[] = [
@@ -97,7 +132,10 @@ export function ProjectForm({
       launch_date: form.launch_date || null,
       completion_date: form.completion_date || null,
       amenities: form.amenities
-        ? form.amenities.split(",").map((s) => s.trim()).filter(Boolean)
+        ? form.amenities
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
         : [],
       cover_image: cover || null,
       layout_image: layout || null,
@@ -161,15 +199,27 @@ export function ProjectForm({
           </div>
           <div>
             <Label htmlFor="city">City</Label>
-            <Input id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
+            <Input
+              id="city"
+              value={form.city}
+              onChange={(e) => setForm({ ...form, city: e.target.value })}
+            />
           </div>
           <div>
             <Label htmlFor="area">Area / neighbourhood</Label>
-            <Input id="area" value={form.area} onChange={(e) => setForm({ ...form, area: e.target.value })} />
+            <Input
+              id="area"
+              value={form.area}
+              onChange={(e) => setForm({ ...form, area: e.target.value })}
+            />
           </div>
           <div>
             <Label htmlFor="address">Address</Label>
-            <Input id="address" value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
+            <Input
+              id="address"
+              value={form.address}
+              onChange={(e) => setForm({ ...form, address: e.target.value })}
+            />
           </div>
 
           <div>
@@ -332,7 +382,11 @@ function MediaUpload({
         </div>
         <div className="flex items-center gap-2">
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-muted">
-            {uploading ? <Loader2 className="size-4 animate-spin" /> : <Upload className="size-4" />}
+            {uploading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Upload className="size-4" />
+            )}
             {url ? "Replace" : "Upload"}
             <input
               type="file"

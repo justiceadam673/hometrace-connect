@@ -26,24 +26,9 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-8 md:flex">
           <Link
             to="/properties"
-            search={{ listing_type: "sale" }}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Buy
-          </Link>
-          <Link
-            to="/properties"
-            search={{ listing_type: "rent" }}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Rent
-          </Link>
-          <Link
-            to="/properties"
-            search={{}}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            All listings
+            Explore Properties
           </Link>
           <Link
             to="/"
@@ -67,8 +52,15 @@ export function SiteHeader() {
                 <Link to="/profile">Profile</Link>
               </Button>
               {isAdmin ? (
-                <Button asChild size="sm" variant="outline" className="hidden md:inline-flex border-primary/40 text-primary hover:bg-primary/10 hover:text-primary">
-                  <Link to="/admin"><ShieldCheck className="mr-1 size-4" /> Admin</Link>
+                <Button
+                  asChild
+                  size="sm"
+                  variant="outline"
+                  className="hidden md:inline-flex border-primary/40 text-primary hover:bg-primary/10 hover:text-primary"
+                >
+                  <Link to="/admin">
+                    <ShieldCheck className="mr-1 size-4" /> Admin
+                  </Link>
                 </Button>
               ) : null}
               <Button asChild size="sm" className="rounded-full hidden sm:inline-flex">
@@ -108,22 +100,86 @@ export function SiteHeader() {
       {open ? (
         <div className="border-t border-border/60 bg-background/95 md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-3">
-            <Link to="/properties" search={{ listing_type: "sale" }} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Buy</Link>
-            <Link to="/properties" search={{ listing_type: "rent" }} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Rent</Link>
-            <Link to="/properties" search={{}} className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>All listings</Link>
-            <Link to="/" hash="verified" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Verified agents</Link>
+            <Link
+              to="/properties"
+              search={{ listing_type: "sale" }}
+              className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+              onClick={() => setOpen(false)}
+            >
+              Buy
+            </Link>
+            <Link
+              to="/properties"
+              search={{ listing_type: "rent" }}
+              className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+              onClick={() => setOpen(false)}
+            >
+              Rent
+            </Link>
+            <Link
+              to="/properties"
+              search={{}}
+              className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+              onClick={() => setOpen(false)}
+            >
+              All listings
+            </Link>
+            <Link
+              to="/"
+              hash="verified"
+              className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+              onClick={() => setOpen(false)}
+            >
+              Verified agents
+            </Link>
             {user ? (
               <>
-                <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Dashboard</Link>
-                <Link to="/developer" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Developer</Link>
-                <Link to="/profile" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Profile</Link>
+                <Link
+                  to="/dashboard"
+                  className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  onClick={() => setOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to="/developer"
+                  className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  onClick={() => setOpen(false)}
+                >
+                  Developer
+                </Link>
+                <Link
+                  to="/profile"
+                  className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  onClick={() => setOpen(false)}
+                >
+                  Profile
+                </Link>
                 {isAdmin ? (
-                  <Link to="/admin" className="rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/15" onClick={() => setOpen(false)}>Admin</Link>
+                  <Link
+                    to="/admin"
+                    className="rounded-md bg-primary/10 px-3 py-2 text-sm font-medium text-primary hover:bg-primary/15"
+                    onClick={() => setOpen(false)}
+                  >
+                    Admin
+                  </Link>
                 ) : null}
-                <Link to="/properties/new" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Post property</Link>
+                <Link
+                  to="/properties/new"
+                  className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+                  onClick={() => setOpen(false)}
+                >
+                  Post property
+                </Link>
               </>
             ) : (
-              <Link to="/auth" className="rounded-md px-3 py-2 text-sm hover:bg-muted" onClick={() => setOpen(false)}>Sign in</Link>
+              <Link
+                to="/auth"
+                className="rounded-md px-3 py-2 text-sm hover:bg-muted"
+                onClick={() => setOpen(false)}
+              >
+                Sign in
+              </Link>
             )}
           </nav>
         </div>

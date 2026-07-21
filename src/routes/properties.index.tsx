@@ -8,13 +8,29 @@ import { PropertyCard } from "@/components/property-card";
 import { propertiesQuery } from "@/lib/properties";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const searchSchema = z.object({
   q: z.string().optional(),
   listing_type: z.enum(["sale", "rent", "shortlet", "all"]).optional(),
   property_type: z
-    .enum(["house", "duplex", "apartment", "land", "commercial", "office", "warehouse", "estate", "all"])
+    .enum([
+      "house",
+      "duplex",
+      "apartment",
+      "land",
+      "commercial",
+      "office",
+      "warehouse",
+      "estate",
+      "all",
+    ])
     .optional(),
   state: z.string().optional(),
   bedrooms: z.coerce.number().optional(),
@@ -46,7 +62,43 @@ export const Route = createFileRoute("/properties/")({
   component: PropertiesPage,
 });
 
-const NIGERIAN_STATES = ["Lagos", "FCT", "Rivers", "Oyo", "Kano", "Ogun", "Enugu"];
+const NIGERIAN_STATES = [
+  "Abia",
+  "Adamawa",
+  "Akwa Ibom",
+  "Anambra",
+  "Bauchi",
+  "Bayelsa",
+  "Benue",
+  "Borno",
+  "Cross River",
+  "Delta",
+  "Edo",
+  "Ekiti",
+  "Enugu",
+  "FCT",
+  "Gombe",
+  "Imo",
+  "Jigawa",
+  "Kaduna",
+  "Kano",
+  "Katsina",
+  "Kebbi",
+  "Kogi",
+  "Kwara",
+  "Lagos",
+  "Niger",
+  "Ogun",
+  "Ondo",
+  "Osun",
+  "Oyo",
+  "Plateau",
+  "Rivers",
+  "Sokoto",
+  "Taraba",
+  "Yobe",
+  "Zamfara",
+];
 
 function PropertiesPage() {
   const search = Route.useSearch();
@@ -74,7 +126,8 @@ function PropertiesPage() {
             <div>
               <h1 className="text-2xl font-semibold md:text-3xl">Property listings</h1>
               <p className="mt-1 text-sm text-muted-foreground">
-                {data.length} verified {data.length === 1 ? "property" : "properties"} across Nigeria
+                {data.length} verified {data.length === 1 ? "property" : "properties"} across
+                Nigeria
               </p>
             </div>
             <Link to="/" className="text-sm text-muted-foreground hover:text-foreground">
@@ -140,7 +193,9 @@ function PropertiesPage() {
                 <SelectContent>
                   <SelectItem value="all">Any state</SelectItem>
                   {NIGERIAN_STATES.map((s) => (
-                    <SelectItem key={s} value={s}>{s === "FCT" ? "Abuja (FCT)" : s}</SelectItem>
+                    <SelectItem key={s} value={s}>
+                      {s === "FCT" ? "Abuja (FCT)" : s}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -162,7 +217,11 @@ function PropertiesPage() {
           <div className="grid place-items-center rounded-2xl border border-dashed border-border p-16 text-center">
             <p className="text-lg font-medium">No properties match those filters.</p>
             <p className="mt-1 text-sm text-muted-foreground">Try widening your search.</p>
-            <Button variant="outline" className="mt-4" onClick={() => navigate({ to: "/properties", search: {} })}>
+            <Button
+              variant="outline"
+              className="mt-4"
+              onClick={() => navigate({ to: "/properties", search: {} })}
+            >
               Clear filters
             </Button>
           </div>
