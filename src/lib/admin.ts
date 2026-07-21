@@ -92,7 +92,7 @@ export function adminDevelopersQuery() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("developers")
-        .select("id, company_name, logo_url, website, email, phone, headquarters, established_year, description, verification, featured, created_at, profiles!developers_id_fkey(full_name, avatar_url, phone)")
+        .select("id, company_name, logo_url, website, email, phone, headquarters, established_year, description, verification, featured, created_at")
         .order("created_at", { ascending: false })
         .limit(200);
       if (error) throw error;
