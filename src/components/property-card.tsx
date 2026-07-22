@@ -1,11 +1,15 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Bath, BedDouble, Heart, MapPin, Ruler, ShieldCheck } from "lucide-react";
 import type { PropertyRow } from "@/lib/properties";
 import { resolveImage } from "@/lib/properties";
+import { agentVerificationByIdQuery } from "@/lib/agent-kyc";
 import { formatNaira } from "@/lib/format";
 
 export function PropertyCard({ property }: { property: PropertyRow }) {
   const img = resolveImage(property.cover_image);
+  const { data: agentVerification } = useQuery(agentVerificationByIdQuery(property.agent_id));
+  const isAgentVerified = agentVerification === "verified";
   const priceSuffix = property.listing_type === "rent" ? "/year" : property.listing_type === "shortlet" ? "/night" : "";
 
   return (
@@ -28,10 +32,12 @@ export function PropertyCard({ property }: { property: PropertyRow }) {
           ) : null}
         </div>
         <div className="absolute left-4 top-4 flex gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground ring-1 ring-black/5">
-            <ShieldCheck className="size-3 text-primary" />
-            Verified
-          </span>
+          {isAgentVerified ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-background/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground ring-1 ring-black/5">
+              <ShieldCheck className="size-3 text-primary" />
+              Verified
+            </span>
+          ) : null}
           {property.featured ? (
             <span className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary-foreground">
               Featured
