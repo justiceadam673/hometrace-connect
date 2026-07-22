@@ -1,11 +1,15 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Bath, BedDouble, Heart, MapPin, Ruler, ShieldCheck } from "lucide-react";
 import type { PropertyRow } from "@/lib/properties";
 import { resolveImage } from "@/lib/properties";
+import { agentVerificationByIdQuery } from "@/lib/agent-kyc";
 import { formatNaira } from "@/lib/format";
 
 export function PropertyCard({ property }: { property: PropertyRow }) {
   const img = resolveImage(property.cover_image);
+  const { data: agentVerification } = useQuery(agentVerificationByIdQuery(property.agent_id));
+  const isAgentVerified = agentVerification === "verified";
   const priceSuffix = property.listing_type === "rent" ? "/year" : property.listing_type === "shortlet" ? "/night" : "";
 
   return (
