@@ -140,9 +140,11 @@ function PropertyDetail() {
           {/* Main */}
           <div className="md:col-span-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                <ShieldCheck className="size-3.5" /> Verified listing
-              </span>
+              {isAgentVerified ? (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                  <ShieldCheck className="size-3.5" /> Verified listing
+                </span>
+              ) : null}
               <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 For {property.listing_type}
               </span>
