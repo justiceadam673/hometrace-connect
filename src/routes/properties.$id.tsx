@@ -70,7 +70,8 @@ function PropertyDetail() {
   if (!property) return null;
 
   const isAgentVerified = agentVerification === "verified";
-  const img = resolveImage(property.cover_image);
+  const cover = resolveImage(property.cover_image);
+  const galleryImages = (property.gallery ?? []).map(resolveImage).filter(Boolean);
   const location = [property.area, property.city, property.state].filter(Boolean).join(", ");
   const priceSuffix = property.listing_type === "rent" ? " /year" : property.listing_type === "shortlet" ? " /night" : "";
   const agentName = agent?.full_name || "HomeTrace Agent";
