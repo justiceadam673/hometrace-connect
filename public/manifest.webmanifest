@@ -1,0 +1,15 @@
+{
+  "name": "HomeTrace — Nigeria's Verified Property Marketplace",
+  "short_name": "HomeTrace",
+  "description": "Discover verified homes, land and rentals across Nigeria. Connect directly with vetted agents and developers.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#22C55E",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
