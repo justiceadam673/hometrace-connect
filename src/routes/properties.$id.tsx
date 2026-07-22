@@ -101,10 +101,10 @@ function PropertyDetail() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-3 md:grid-cols-4 md:grid-rows-2">
             <div className="md:col-span-2 md:row-span-2">
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-black/5">
-                {img ? (
+              <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-muted ring-1 ring-black/5">
+                {cover ? (
                   <img
-                    src={img}
+                    src={cover}
                     alt={property.title}
                     width={1600}
                     height={1200}
@@ -113,20 +113,23 @@ function PropertyDetail() {
                 ) : null}
               </div>
             </div>
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="hidden aspect-[4/3] overflow-hidden rounded-2xl bg-muted ring-1 ring-black/5 md:block">
-                {img ? (
-                  <img
-                    src={img}
-                    alt={`${property.title} view ${i + 2}`}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    className="size-full object-cover"
-                  />
-                ) : null}
-              </div>
-            ))}
+            {Array.from({ length: 4 }).map((_, i) => {
+              const src = galleryImages[i];
+              return (
+                <div key={i} className="hidden aspect-[4/3] overflow-hidden rounded-2xl bg-muted ring-1 ring-black/5 md:block">
+                  {src ? (
+                    <img
+                      src={src}
+                      alt={`${property.title} view ${i + 2}`}
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      className="size-full object-cover"
+                    />
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
