@@ -45,9 +45,9 @@ export function SiteHeader() {
               <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
                 <Link to="/dashboard">Dashboard</Link>
               </Button>
-              <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
+              {/* <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
                 <Link to="/developer">Developer</Link>
-              </Button>
+              </Button> */}
               <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
                 <Link to="/profile">Profile</Link>
               </Button>
@@ -141,13 +141,13 @@ export function SiteHeader() {
                 >
                   Dashboard
                 </Link>
-                <Link
+                {/* <Link
                   to="/developer"
                   className="rounded-md px-3 py-2 text-sm hover:bg-muted"
                   onClick={() => setOpen(false)}
                 >
                   Developer
-                </Link>
+                </Link> */}
                 <Link
                   to="/profile"
                   className="rounded-md px-3 py-2 text-sm hover:bg-muted"
@@ -165,11 +165,11 @@ export function SiteHeader() {
                   </Link>
                 ) : null}
                 <Link
-                  to="/properties/new"
+                  to="/auth"
                   className="rounded-md px-3 py-2 text-sm hover:bg-muted"
                   onClick={() => setOpen(false)}
                 >
-                  Post property
+                  Sign up
                 </Link>
               </>
             ) : (

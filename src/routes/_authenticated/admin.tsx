@@ -33,12 +33,12 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/agents", label: "Agents", icon: ShieldCheck },
-  { to: "/admin/developers", label: "Developers", icon: ShieldCheck },
+  // { to: "/admin/developers", label: "Developers", icon: ShieldCheck },
   { to: "/admin/listings", label: "Listings", icon: ListChecks },
-  { to: "/admin/reports", label: "Reports", icon: Flag },
-  { to: "/admin/announcements", label: "Announcements", icon: Megaphone },
-  { to: "/admin/blog", label: "Blog", icon: BookOpen },
-  { to: "/admin/faqs", label: "FAQs", icon: HelpCircle },
+  // { to: "/admin/reports", label: "Reports", icon: Flag },
+  // { to: "/admin/announcements", label: "Announcements", icon: Megaphone },
+  // { to: "/admin/blog", label: "Blog", icon: BookOpen },
+  // { to: "/admin/faqs", label: "FAQs", icon: HelpCircle },
   { to: "/dashboard", label: "Exit Admin", icon: ShieldCheck },
 ];
 

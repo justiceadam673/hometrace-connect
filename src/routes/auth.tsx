@@ -132,7 +132,7 @@ function AuthPage() {
             </TabsList>
 
             <div className="mt-6">
-              <Button
+              {/* <Button
                 type="button"
                 variant="outline"
                 className="w-full"
@@ -141,7 +141,7 @@ function AuthPage() {
                 disabled={loading}
               >
                 <GoogleIcon /> Continue with Google
-              </Button>
+              </Button> */}
 
               <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
                 <div className="h-px flex-1 bg-border" />

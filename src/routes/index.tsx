@@ -1,13 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowRight, Building2, Home as HomeIcon, LandPlot, MapPin, ShieldCheck, Sparkles, Store, Warehouse } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  Home as HomeIcon,
+  LandPlot,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  Store,
+  Warehouse,
+} from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PropertyCard } from "@/components/property-card";
 import { propertiesQuery } from "@/lib/properties";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-property.jpg";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,16 +70,25 @@ function LandingPage() {
                 HOMETRACE
               </h1>
               <p className="mt-6 max-w-2xl text-pretty text-base font-medium text-white/95 md:text-xl">
-                Verified homes, land and developments — connecting buyers directly with vetted agents and trusted developers across Nigeria.
+                Verified homes, land and developments — connecting buyers directly with vetted
+                agents and trusted developers across Nigeria.
               </p>
               <p className="mt-3 max-w-xl text-pretty text-sm text-white/75 md:text-base">
-                Every listing is KYC-checked. Every agent is background-verified. Every transaction, traceable.
+                Every listing is KYC-checked. Every agent is background-verified. Every transaction,
+                traceable.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Button asChild size="lg" className="rounded-full px-8">
-                  <Link to="/properties" search={{}}>Browse properties</Link>
+                  <Link to="/properties" search={{}}>
+                    Browse properties
+                  </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full border-white/40 bg-white/10 px-8 text-white backdrop-blur hover:bg-white/20 hover:text-white">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full border-white/40 bg-white/10 px-8 text-white backdrop-blur hover:bg-white/20 hover:text-white"
+                >
                   <Link to="/auth">Join HomeTrace</Link>
                 </Button>
               </div>
@@ -81,7 +99,6 @@ function LandingPage() {
 
       {/* Categories */}
       <section className="border-y border-border/60 bg-background">
-
         <div className="mx-auto max-w-7xl px-6 py-8">
           <div className="flex items-center gap-8 overflow-x-auto pb-1">
             {CATEGORIES.map((cat) => (
@@ -104,7 +121,7 @@ function LandingPage() {
       </section>
 
       {/* Featured Properties */}
-      <section className="bg-surface px-6 py-20">
+      {/* <section className="bg-surface px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
@@ -128,7 +145,7 @@ function LandingPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Trust section */}
       <section id="verified" className="px-6 py-24">
@@ -141,7 +158,9 @@ function LandingPage() {
               Every property is manually verified for your peace of mind.
             </h2>
             <p className="mt-4 max-w-prose text-pretty text-muted-foreground">
-              In the Nigerian real estate market, trust is everything. Our on-the-ground team verifies title documents, physical existence, and agent credentials before a listing goes live.
+              In the Nigerian real estate market, trust is everything. Our on-the-ground team
+              verifies title documents, physical existence, and agent credentials before a listing
+              goes live.
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               <TrustItem
@@ -182,11 +201,11 @@ function LandingPage() {
                 <div className="grid size-10 place-items-center rounded-full bg-trust-soft text-trust">
                   <ShieldCheck className="size-5" />
                 </div>
-                <span className="text-sm font-semibold">100% secure</span>
+                <span className="text-sm font-semibold">100% verified agents</span>
               </div>
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Every transaction is protected by our verification and dispute team.
-              </p>
+              {/* <p className="text-xs leading-relaxed text-muted-foreground">
+                Every agent is fully verified.
+              </p> */}
             </div>
           </div>
         </div>
@@ -199,7 +218,8 @@ function LandingPage() {
             List your property with Nigeria's most trusted platform.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-background/70">
-            Reach verified buyers actively searching in your area. Get your verified agent badge in under 48 hours.
+            Reach verified buyers actively searching in your area. Get your verified agent badge in
+            under 48 hours.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="rounded-full">
@@ -211,7 +231,9 @@ function LandingPage() {
               variant="outline"
               className="rounded-full border-background/20 bg-background/10 text-background hover:bg-background/20 hover:text-background"
             >
-              <Link to="/properties" search={{}}>Browse properties</Link>
+              <Link to="/properties" search={{}}>
+                Browse properties
+              </Link>
             </Button>
           </div>
         </div>
