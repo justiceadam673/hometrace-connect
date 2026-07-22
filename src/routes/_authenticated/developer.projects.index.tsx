@@ -8,7 +8,7 @@ import { useAuth } from "@/lib/auth-context";
 import { myDeveloperQuery, projectsQuery } from "@/lib/developers";
 import { formatNaira } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/developer/projects")({
+export const Route = createFileRoute("/_authenticated/developer/projects/")({
   component: DeveloperProjectsList,
 });
 
