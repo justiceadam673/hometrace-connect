@@ -31,8 +31,7 @@ export function SiteHeader() {
             Explore Properties
           </Link>
           <Link
-            to="/"
-            hash="verified"
+            to="/agents"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             Verified agents

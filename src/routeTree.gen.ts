@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EmailVerifiedRouteImport } from './routes/email-verified'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIndexRouteImport } from './routes/properties.index'
@@ -47,6 +48,11 @@ const EmailVerifiedRoute = EmailVerifiedRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -201,6 +207,7 @@ const AuthenticatedDeveloperProjectsIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/auth': typeof AuthRoute
   '/email-verified': typeof EmailVerifiedRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
@@ -231,6 +238,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agents': typeof AgentsRoute
   '/auth': typeof AuthRoute
   '/email-verified': typeof EmailVerifiedRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -261,6 +269,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/agents': typeof AgentsRoute
   '/auth': typeof AuthRoute
   '/email-verified': typeof EmailVerifiedRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agents'
     | '/auth'
     | '/email-verified'
     | '/admin'
@@ -323,6 +333,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agents'
     | '/auth'
     | '/email-verified'
     | '/dashboard'
@@ -352,6 +363,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/agents'
     | '/auth'
     | '/email-verified'
     | '/_authenticated/admin'
@@ -384,6 +396,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AgentsRoute: typeof AgentsRoute
   AuthRoute: typeof AuthRoute
   EmailVerifiedRoute: typeof EmailVerifiedRoute
   PropertiesIdRoute: typeof PropertiesIdRoute
@@ -404,6 +417,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -692,6 +712,7 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AgentsRoute: AgentsRoute,
   AuthRoute: AuthRoute,
   EmailVerifiedRoute: EmailVerifiedRoute,
   PropertiesIdRoute: PropertiesIdRoute,
