@@ -36,6 +36,7 @@ import { Route as AuthenticatedAdminDevelopersRouteImport } from './routes/_auth
 import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin.blog'
 import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin.announcements'
 import { Route as AuthenticatedAdminAgentsRouteImport } from './routes/_authenticated/admin.agents'
+import { Route as AuthenticatedDeveloperProjectsIndexRouteImport } from './routes/_authenticated/developer.projects.index'
 import { Route as AuthenticatedPropertiesIdEditRouteImport } from './routes/_authenticated/properties.$id.edit'
 import { Route as AuthenticatedDeveloperProjectsNewRouteImport } from './routes/_authenticated/developer.projects.new'
 import { Route as AuthenticatedDeveloperProjectsIdRouteImport } from './routes/_authenticated/developer.projects.$id'
@@ -186,6 +187,12 @@ const AuthenticatedAdminAgentsRoute =
     path: '/agents',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedDeveloperProjectsIndexRoute =
+  AuthenticatedDeveloperProjectsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDeveloperProjectsRoute,
+  } as any)
 const AuthenticatedPropertiesIdEditRoute =
   AuthenticatedPropertiesIdEditRouteImport.update({
     id: '/properties/$id/edit',
@@ -235,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
+  '/developer/projects/': typeof AuthenticatedDeveloperProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -256,7 +264,6 @@ export interface FileRoutesByTo {
   '/agent/verification': typeof AuthenticatedAgentVerificationRoute
   '/developer/marketing': typeof AuthenticatedDeveloperMarketingRoute
   '/developer/profile': typeof AuthenticatedDeveloperProfileRoute
-  '/developer/projects': typeof AuthenticatedDeveloperProjectsRouteWithChildren
   '/developer/team': typeof AuthenticatedDeveloperTeamRoute
   '/properties/new': typeof AuthenticatedPropertiesNewRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -264,6 +271,7 @@ export interface FileRoutesByTo {
   '/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
+  '/developer/projects': typeof AuthenticatedDeveloperProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/_authenticated/developer/projects/$id': typeof AuthenticatedDeveloperProjectsIdRoute
   '/_authenticated/developer/projects/new': typeof AuthenticatedDeveloperProjectsNewRoute
   '/_authenticated/properties/$id/edit': typeof AuthenticatedPropertiesIdEditRoute
+  '/_authenticated/developer/projects/': typeof AuthenticatedDeveloperProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -330,6 +339,7 @@ export interface FileRouteTypes {
     | '/developer/projects/$id'
     | '/developer/projects/new'
     | '/properties/$id/edit'
+    | '/developer/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -351,7 +361,6 @@ export interface FileRouteTypes {
     | '/agent/verification'
     | '/developer/marketing'
     | '/developer/profile'
-    | '/developer/projects'
     | '/developer/team'
     | '/properties/new'
     | '/admin'
@@ -359,6 +368,7 @@ export interface FileRouteTypes {
     | '/developer/projects/$id'
     | '/developer/projects/new'
     | '/properties/$id/edit'
+    | '/developer/projects'
   id:
     | '__root__'
     | '/'
@@ -391,6 +401,7 @@ export interface FileRouteTypes {
     | '/_authenticated/developer/projects/$id'
     | '/_authenticated/developer/projects/new'
     | '/_authenticated/properties/$id/edit'
+    | '/_authenticated/developer/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -594,6 +605,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAgentsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/developer/projects/': {
+      id: '/_authenticated/developer/projects/'
+      path: '/'
+      fullPath: '/developer/projects/'
+      preLoaderRoute: typeof AuthenticatedDeveloperProjectsIndexRouteImport
+      parentRoute: typeof AuthenticatedDeveloperProjectsRoute
+    }
     '/_authenticated/properties/$id/edit': {
       id: '/_authenticated/properties/$id/edit'
       path: '/properties/$id/edit'
@@ -648,6 +666,7 @@ const AuthenticatedAdminRouteWithChildren =
 interface AuthenticatedDeveloperProjectsRouteChildren {
   AuthenticatedDeveloperProjectsIdRoute: typeof AuthenticatedDeveloperProjectsIdRoute
   AuthenticatedDeveloperProjectsNewRoute: typeof AuthenticatedDeveloperProjectsNewRoute
+  AuthenticatedDeveloperProjectsIndexRoute: typeof AuthenticatedDeveloperProjectsIndexRoute
 }
 
 const AuthenticatedDeveloperProjectsRouteChildren: AuthenticatedDeveloperProjectsRouteChildren =
@@ -656,6 +675,8 @@ const AuthenticatedDeveloperProjectsRouteChildren: AuthenticatedDeveloperProject
       AuthenticatedDeveloperProjectsIdRoute,
     AuthenticatedDeveloperProjectsNewRoute:
       AuthenticatedDeveloperProjectsNewRoute,
+    AuthenticatedDeveloperProjectsIndexRoute:
+      AuthenticatedDeveloperProjectsIndexRoute,
   }
 
 const AuthenticatedDeveloperProjectsRouteWithChildren =
